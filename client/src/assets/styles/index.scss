@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+body {
+  main {
+    padding-top: 70px;
+    color: #000000;
+
+    p, label, div, input {
+      font-family: Mulish;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Baskervville SC";
+    }
+  }
+
+  @import "../components/NavBar/navbar";
+  @import "../components/Home/home";
+  @import "../components/Footer/footer";
+  @import "../components/AboutMe/aboutMe";
+  @import "../components/Cursuri/cursuri";
+  @import "../components/Access/Autentificare/loginComponent";
+  @import "../components/User/contContainer";
+  @import "../components/Cart/cartComponent";
+  @import "../components/Contact/contactComponent";
+}

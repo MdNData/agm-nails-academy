@@ -1,0 +1,50 @@
+div.auth-button {
+  grid-area: access;
+  text-align: center;
+  
+  @media screen and (min-width: 800px) {
+    border-radius: 9999px;
+    transition: all 300ms;
+
+    a {
+      display: flex;
+      text-decoration: none;
+      background-color: rgb(219, 160, 77);
+      color: white;
+      font-size: 25px;
+      margin: auto;
+      margin-top: -3px;
+      font-weight: 400;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 50px;
+      border: 1px solid rgb(219, 160, 77);
+
+      &:hover {
+        color: rgb(219, 160, 77);
+        background-color: white;
+      }
+
+      span {
+        font-size: 17px;
+        font-family: Mulish;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 799px) {
+
+    a {
+      display: block;
+      color: #0a0f18;
+      font-size: 25px;
+      padding-top: 3px;
+      font-weight: 400;
+
+      &:hover {
+        color: rgb(219, 160, 77);
+      }
+    }
+  }
+}

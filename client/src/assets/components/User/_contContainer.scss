@@ -1,0 +1,174 @@
+.cont-container {
+  @import "../AboutMe/Introduction/TopTitle/topTitle";
+
+  $primary-color: rgb(219, 160, 77);
+  $primary-hover: darken(rgb(219, 160, 77), 10%);
+
+  .cont-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .account-sections {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .account-section {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+
+    h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin: 0;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      }
+    }
+
+    .info-value {
+      padding: 0.8rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2c3e50;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+  }
+
+  button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &.edit-btn {
+      background: $primary-color;
+      color: white;
+      &:hover {
+        background: $primary-hover;
+      }
+    }
+
+    &.save-btn {
+      background: $primary-color;
+      color: white;
+      &:hover {
+        background: $primary-hover;
+      }
+    }
+
+    &.cancel-btn {
+      background: #e0e0e0;
+      color: #2c3e50;
+      &:hover {
+        background: #d0d0d0;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  .placeholder-section {
+    padding: 2rem;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .logout-btn {
+    padding: 0.8rem 1.5rem;
+    background: rgb(219, 160, 77);
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
+    color: white;
+    width: 150px;
+    text-align: center;
+    margin: auto;
+    font-family: Mulish;
+
+    &:hover {
+      background: $primary-color;
+      color: white;
+      box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+    }
+  }
+}

@@ -1,0 +1,1 @@
+nav.navbar{position:fixed;display:flex;height:64px;width:100%;align-items:center;justify-content:space-between;background-color:#fff;z-index:50;color:#000;box-shadow:0 2px 4px rgba(0,0,0,.1)}nav.navbar .logo a{display:flex;align-items:center;cursor:pointer;text-decoration:none;padding-left:15px}nav.navbar .logo a img{height:40px;margin-right:7px;margin-top:-3px}

@@ -1,0 +1,42 @@
+.where-we-are {
+  padding: 64px 0;
+  background-color: rgba(219, 160, 77, 0.11);
+
+  div {
+    margin: 0 16px;
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+
+    h2 {
+      font-family: Mulish;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+
+      svg {
+        color: rgb(219, 160, 77);
+        margin-right: 12px;
+        font-size: 32px;
+      }
+    }
+
+    p {
+      font-family: Mulish;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      font-size: 18px;
+      font-family: Mulish;
+      text-decoration: none;
+      color: rgb(219, 160, 77);
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.logo {
+
+  a {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    max-width: 140px;
+    flex-wrap: wrap;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      height: 35px;
+    }
+
+    span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      // font-style: italic;
+      color: #111827;
+      font-family: "Baskervville SC", sans-serif;
+      // text-transform: uppercase;
+      margin-top: 3px;
+      line-height: 0.8;
+      letter-spacing: 2px;
+    }
+  }
+}

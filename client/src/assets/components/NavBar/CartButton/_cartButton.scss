@@ -1,0 +1,25 @@
+.cart-button {
+  grid-area: cart;
+  text-align: center;
+
+  a {
+    display: block;
+    color: #0a0f18;
+    font-size: 25px;
+    padding-top: 3px;
+    font-weight: 400;
+
+    &:hover {
+      color: rgb(219, 160, 77);
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    margin: auto;
+    margin-right: 1.5vw;
+
+    a {
+      font-size: 28px;
+    }
+  }
+}

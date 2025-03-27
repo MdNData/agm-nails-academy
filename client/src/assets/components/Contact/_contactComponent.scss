@@ -1,0 +1,141 @@
+$primary-color: rgb(219, 160, 77);
+$primary-hover: darken($primary-color, 10%);
+$background-light: #f9f9f9;
+
+.contact-container {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+
+  .contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: darken($primary-color, 15%);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-info {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .info-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon-box {
+      background: rgba($primary-color, 0.1);
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1.5rem;
+
+      .icon {
+        color: $primary-color;
+        font-size: 1.4rem;
+      }
+    }
+
+    h3 {
+      color: #333;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    p {
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      display: inline-block;
+      background: rgba($primary-color, 0.1);
+      color: $primary-color;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .contact-link {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $primary-hover;
+      }
+    }
+  }
+
+  .map-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    height: 600px;
+
+    .map-wrapper {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      height: 100%;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin: 2rem auto;
+
+    .contact-header h1 {
+      font-size: 2rem;
+    }
+
+    .map-container {
+      height: 400px;
+    }
+  }
+}

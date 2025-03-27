@@ -1,0 +1,15 @@
+footer {
+  background-color: rgb(255, 255, 255);
+  max-width: 650px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  text-align: center;
+
+  @import "./FooterHeader/footerHeader";
+  @import "./Socials/socials";
+  @import "./FooterLinks/footerLinks";
+  @import "./FooterContact/footerContact";
+  @import "./Credits/credits";
+}

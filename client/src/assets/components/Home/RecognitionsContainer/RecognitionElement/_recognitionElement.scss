@@ -1,0 +1,25 @@
+.recognition-element {
+  display: block;
+  width: 100%;
+  padding: 24px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  max-width: 1280px;
+
+  svg {
+    font-size: 48px;
+    color: rgb(219, 160, 77);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: Mulish;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-family: Mulish;
+    font-size: 16px;
+  }
+}

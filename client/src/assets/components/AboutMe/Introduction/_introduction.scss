@@ -1,0 +1,64 @@
+.introduction {
+  @import "./TopTitle/topTitle";
+
+  .story {
+    max-width: 700px;
+    padding: 0 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin: auto;
+
+    &.open {
+      max-height: none;
+    }
+
+    p {
+      text-align: left;
+      font-family: Mulish;
+      font-size: 16px;
+      color: #767676;
+      line-height: 1.6;
+      margin-bottom: 10px;
+
+      @media screen and (min-width: 800px) {
+        font-size: 18px;
+      }
+    }
+
+    img {
+      width: 90%;
+      border-radius: 25px;
+      margin: 15px 0;
+      max-width: 300px;
+    }
+  }
+
+  button {
+    display: block;
+    background-color: rgb(219, 160, 77);
+    border: 1px solid rgb(219, 160, 77);
+    width: 78%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: white;
+    }
+
+    a {
+      color: white;
+      font-family: Mulish;
+      text-decoration: none;
+
+      &:hover {
+        color: rgb(219, 160, 77);
+      }
+    }
+  }
+}

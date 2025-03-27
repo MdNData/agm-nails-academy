@@ -1,0 +1,22 @@
+section.hero-container {
+  @media screen and (min-width: 800px) {
+    max-width: 1280px;
+    margin: auto;
+    padding: 100px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 48px;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 799px) {
+    height: 600px;
+    background-image: url("../images/hero2-image.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
+  @import "./LeftHero/leftHero";
+  @import "./RightHero/rightHero";
+  @import "./MobileHero/mobileHero";
+}

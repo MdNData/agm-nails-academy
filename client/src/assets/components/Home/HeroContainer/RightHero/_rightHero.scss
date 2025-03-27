@@ -1,0 +1,11 @@
+.right-hero {
+    display: flex;
+    justify-content: center;
+ img {
+    max-width: 80%;
+    max-height: 500px;
+    border-radius: 75px;
+    overflow: hidden;
+    transform: rotate(2deg);
+ }
+}

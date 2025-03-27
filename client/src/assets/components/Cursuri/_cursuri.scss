@@ -1,0 +1,9 @@
+.cursuri {
+  @import "../AboutMe/Introduction/TopTitle/topTitle";
+  @import "./CursContainer/cursContainer";
+}
+
+.single-curs-page {
+  @import "./SingleCursPage/singleCursPage";
+  @import "../AboutMe/Introduction/TopTitle/topTitle";
+}

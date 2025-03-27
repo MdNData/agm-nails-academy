@@ -1,0 +1,24 @@
+.access-menu-container {
+  display: grid;
+  grid-template-areas: "logo access cart menu";
+  grid-template-columns: 1fr 50px 50px 50px;
+  width: 100vw;
+  align-items: center;
+  padding: 0 15px;
+
+  @media screen and (min-width: 800px) {
+    display: grid;
+    grid-template-areas: "logo menu cart access";
+    grid-template-columns: 140px 1fr 50px auto;
+    height: 70px;
+    overflow: hidden;
+    align-items: center;
+    width: 100vw;
+    padding: 0 15px;
+  }
+
+  @import "../MenuContainer/Menu/menu";
+  @import "../AccessButton/accessButton";
+  @import "../CartButton/cartButton";
+  @import "../MenuContainer//MenuBtn/menuBtn";
+}

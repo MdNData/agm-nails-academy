@@ -1,0 +1,25 @@
+.footer-socials {
+  padding: 0 15px;
+  padding-bottom: 40px;
+  width: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+
+  a {
+    padding: 10px;
+    border-radius: 100%;
+    border: 2px solid rgb(219, 160, 77);
+    color: rgb(219, 160, 77);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 18px;
+
+    &:hover {
+      background-color: rgb(219, 160, 77);
+      color: rgb(255, 255, 255);
+    }
+  }
+}
