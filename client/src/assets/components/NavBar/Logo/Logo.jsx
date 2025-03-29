@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import logo from "../../../images/favicon.webp";
+import logo from "../../../images/favicon.png";
 
 const Logo = ({ isMenuOpen = () => {}, setIsMenuOpen = () => {} }) => {
   return (
@@ -10,7 +10,7 @@ const Logo = ({ isMenuOpen = () => {}, setIsMenuOpen = () => {} }) => {
           alt="Reprezentarea frumuseții și eleganței acoperite cu sclipici."
         />
         <span>
-          Nails Academy
+          Shop & Academy
         </span>
       </NavLink>
       
