@@ -8,8 +8,7 @@ const FooterLinks = () => {
       <div>
         <h3>Academy</h3>
         <Link to="/cursuri">Cursuri Fisice</Link>
-        <Link to="/cursuri">Cursuri Online</Link>
-        <Link to="/programare">Programare Unghii</Link>
+        <Link to="/cursuri-online">Cursuri Online</Link>
         <Link to="/produse">Produse</Link>
         <Link to="/contact">Contact</Link>
         <a href="https://ec.europa.eu/consumers/odr" target="_blank">
@@ -18,11 +17,11 @@ const FooterLinks = () => {
       </div>
       <div>
         <h3>Link-uri utile</h3>
-        <Link to="/">Termeni și condiții</Link>
-        <Link to="/">Politică de înscriere</Link>
-        <Link to="/">Politică de returnare</Link>
-        <Link to="/">Politică de plată</Link>
-        <Link to="/">Confidențialitate</Link>
+        <Link to="/termeni">Termeni și condiții</Link>
+        <Link to="/inscriere">Politică de înscriere</Link>
+        <Link to="/retur">Politică de returnare</Link>
+        <Link to="/plata">Politică de plată</Link>
+        <Link to="/confidentialitate">Confidențialitate</Link>
         <a href="https://anpc.ro/ce-este-sal/" target="_blank">
           <img src={imgSal} alt="" />
         </a>

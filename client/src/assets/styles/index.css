@@ -9,7 +9,10 @@ body main {
   padding-top: 70px;
   color: #000000;
 }
-body main p, body main label, body main div, body main input {
+body main p,
+body main label,
+body main div,
+body main input {
   font-family: Mulish;
 }
 body main h1,
@@ -1835,4 +1838,229 @@ body .contact-container .map-container .map-wrapper iframe {
   body .contact-container .map-container {
     height: 400px;
   }
+}
+body div.title {
+  padding: 30px;
+  text-align: center;
+  background-color: rgba(219, 160, 77, 0.11);
+  margin-bottom: 25px;
+}
+body div.title h1 {
+  font-family: "Baskervville SC", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgb(219, 160, 77);
+  font-size: 24px;
+}
+body div.title h2 {
+  color: #858585;
+  text-transform: uppercase;
+  font-family: "Baskervville SC", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+@media screen and (min-width: 800px) {
+  body div.title h1 {
+    font-size: 30px;
+  }
+  body div.title h2 {
+    font-size: 24px;
+    max-width: 680px;
+    margin: auto;
+    margin-top: 10px;
+  }
+}
+body .online-courses-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 25px;
+  padding: 15px;
+  max-width: 1000px;
+  margin: auto;
+}
+body .online-courses-container article {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease;
+  border-top: 5px solid rgb(219, 160, 77);
+}
+body .online-courses-container article:hover {
+  transform: translateY(-5px);
+}
+body .online-courses-container article img {
+  width: 100%;
+  display: block;
+}
+body .online-courses-container article .titles {
+  padding: 15px;
+  text-align: center;
+}
+body .online-courses-container article .titles h2 {
+  font-family: "Urbanist", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 5px;
+}
+body .online-courses-container article .titles h3 {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 5px;
+}
+body .online-courses-container article .price-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+body .online-courses-container article .price-container .price {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: rgb(219, 160, 77);
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-align: center;
+}
+body .online-courses-container article a {
+  margin: 15px;
+  display: block;
+  text-align: center;
+  padding: 12px 20px;
+  font-family: "Mulish", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  background-color: rgb(219, 160, 77);
+  border: 1px solid rgb(219, 160, 77);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+body .online-courses-container article a:hover {
+  background-color: white;
+  color: rgb(219, 160, 77);
+}
+body .products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 25px;
+  padding: 15px;
+  max-width: 1000px;
+  margin: auto;
+}
+body .products-container article {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease;
+  border-top: 5px solid rgb(219, 160, 77);
+}
+body .products-container article:hover {
+  transform: translateY(-5px);
+}
+body .products-container article img {
+  width: 100%;
+  display: block;
+}
+body .products-container article .titles {
+  padding: 15px;
+  text-align: center;
+}
+body .products-container article .titles h2 {
+  font-family: "Urbanist", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 5px;
+}
+body .products-container article .titles h3 {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 5px;
+}
+body .products-container article .price-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+body .products-container article .price-container .price {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: rgb(219, 160, 77);
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-align: center;
+}
+body .products-container article a {
+  margin: 15px;
+  display: block;
+  text-align: center;
+  padding: 12px 20px;
+  font-family: "Mulish", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  background-color: rgb(219, 160, 77);
+  border: 1px solid rgb(219, 160, 77);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+body .products-container article a:hover {
+  background-color: white;
+  color: rgb(219, 160, 77);
+}
+body .legal-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+body .legal-page article {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+body .legal-page article h2 {
+  font-family: "Urbanist", sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: rgb(219, 160, 77);
+}
+body .legal-page article p {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 15px;
 }/*# sourceMappingURL=index.css.map */

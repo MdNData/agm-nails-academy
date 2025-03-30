@@ -19,6 +19,12 @@ import { action as loginAction } from "./Autentificare";
 import ProtectedRoute from "../assets/utils/ProtectedRoute";
 import GuestRoute from "../assets/utils/GuestRoute";
 import Cart from "./Cart";
+import CursuriOnline from "./CursuriOnline";
+import Termeni from "../assets/components/Terms/Termeni";
+import PoliticaInscriere from "../assets/components/Terms/PoliticaInscriere";
+import PoliticaReturnare from "../assets/components/Terms/PoliticaReturnare";
+import PoliticaPlata from "../assets/components/Terms/PoliticaPlata";
+import Confidentialitate from "../assets/components/Terms/Confidentialitate";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "cursuri-online",
-        element: "cursuri online",
+        element: <CursuriOnline />,
       },
       {
         path: "servicii",
@@ -102,6 +108,26 @@ export const router = createBrowserRouter([
             <Cart />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "termeni",
+        element: <Termeni />,
+      },
+      {
+        path: "inscriere",
+        element: <PoliticaInscriere />,
+      },
+      {
+        path: "retur",
+        element: <PoliticaReturnare />,
+      },
+      {
+        path: "plata",
+        element: <PoliticaPlata />,
+      },
+      {
+        path: "confidentialitate",
+        element: <Confidentialitate />,
       },
     ],
   },
