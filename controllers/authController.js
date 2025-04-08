@@ -6,10 +6,13 @@ import User from "../models/userModel.js";
 // Controller pentru înregistrare
 export const register = async (req, res) => {
   try {
+    // Hash-ul parolei
     req.body.password = await hashPassword(req.body.password);
 
+    // Crearea utilizatorului - se prevede ca modelul să conțină și câmpul "nume"
     const user = await User.create(req.body);
 
+    // Crearea token-ului JWT
     const token = createJWT({
       userId: user._id,
       email: user.email,
@@ -23,7 +26,10 @@ export const register = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    res.status(StatusCodes.CREATED).json({ msg: "Utilizator creat cu succes" });
+    // Includi un campo redirectUrl in risposta
+    res
+      .status(StatusCodes.CREATED)
+      .json({ msg: "Utilizator creat cu succes", redirectUrl: "/account" });
   } catch (error) {
     console.error("Eroare la înregistrarea utilizatorului:", error);
     res
@@ -64,7 +70,10 @@ export const login = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    res.status(StatusCodes.OK).json({ msg: "Autentificare reușită" });
+    // Includi un campo redirectUrl nella risposta
+    res
+      .status(StatusCodes.OK)
+      .json({ msg: "Autentificare reușită", redirectUrl: "/account" });
   } catch (error) {
     console.error("Eroare la login:", error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

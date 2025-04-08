@@ -26,12 +26,12 @@ import errorHandlerMiddleware from "./middlewares/errorMiddleware.js";
 
 // Configura il trasportatore con le variabili d'ambiente
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST, // es. "smtp.gmail.com"
-  port: process.env.SMTP_PORT, // es. 587 per TLS, 465 per SSL
-  secure: process.env.SMTP_PORT == 465, // true se si usa SSL
+  host: process.env.SMTP_HOST, 
+  port: process.env.SMTP_PORT, 
+  secure: process.env.SMTP_PORT == 465, 
   auth: {
-    user: process.env.SMTP_USER, // la tua email
-    pass: process.env.SMTP_PASSWORD, // la tua password o app password
+    user: process.env.SMTP_USER, 
+    pass: process.env.SMTP_PASSWORD, 
   },
 });
 

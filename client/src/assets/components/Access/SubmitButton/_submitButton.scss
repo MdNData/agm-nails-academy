@@ -13,11 +13,12 @@
   margin: auto;
   margin-top: 30px;
   font-family: Mulish;
-  padding: 10px 15px 10px 15px;
+  padding: 10px 15px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.187);
   transition: all 0.25s ease;
   border: 2px solid rgb(219, 160, 77);
   color: #fff;
+  position: relative;
 
   &:hover {
     letter-spacing: 2px;
@@ -31,8 +32,34 @@
     content: "";
   }
 
-  &:disabled:hover {
+  &:disabled {
+    background-color: #cccccc;
+    border: 2px solid #cccccc;
     color: rgba(128, 128, 128, 0.7);
     cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    letter-spacing: 1px;
+  }
+}
+
+/* Spinner styling */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

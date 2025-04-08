@@ -1,34 +1,48 @@
 .input-field {
-    max-width: 350px;
-    margin: auto;
-    
-    label {
-        display: block;
-        margin-bottom: 20px;
+  max-width: 350px;
+  margin: auto;
 
-        p {
-            font-size: 16px;
-            font-family: Mulish;
-            text-transform: capitalize;
-            margin-bottom: 7px;
-        }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+    margin-top: 20px;
 
-        svg {
-            position: absolute;
-            margin-top: 8px;
-            margin-left: 8px;
-            font-size: 20px;
-            color: rgb(218, 151, 57);
-        }
-
-        input {
-            width: 100%;
-            padding: 8px 12px 8px 40px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-family: Mulish;
-            margin-bottom: 5px;
-            border: 1px solid rgb(209, 213, 219);
-        }
+    p {
+      font-size: 16px;
+      font-family: Mulish;
+      text-transform: capitalize;
+      margin-bottom: 7px;
     }
+
+    svg {
+      position: absolute;
+      margin-top: 8px;
+      margin-left: 8px;
+      font-size: 20px;
+      color: rgb(218, 151, 57);
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 12px 8px 40px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-family: Mulish;
+      border: 1px solid rgb(209, 213, 219);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+  }
+
+  .error-message {
+    font-size: 14px;
+    font-family: Mulish;
+    color: #fff;
+    background-color: #e53935;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  }
 }

@@ -1,4 +1,4 @@
-import { validationResult, body, param } from "express-validator";
+import { validationResult, body } from "express-validator";
 import { BadRequestError } from "../errors/customErrors.js";
 import User from "../models/userModel.js";
 
@@ -7,7 +7,6 @@ const withValidationErrors = (validateValues) => {
     validateValues,
     (req, res, next) => {
       const errors = validationResult(req);
-
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => error.msg);
         throw new BadRequestError(errorMessages);
@@ -18,6 +17,8 @@ const withValidationErrors = (validateValues) => {
 };
 
 export const validateUserRegistration = withValidationErrors([
+  // Controllo per il campo nume
+  body("nume").notEmpty().withMessage("Numele este obligatoriu"),
   body("email")
     .notEmpty()
     .withMessage("Email-ul este obligatoriu")
@@ -42,4 +43,3 @@ export const validateUserLogin = withValidationErrors([
     .withMessage("Email-ul trebuie să fie valid"),
   body("password").notEmpty().withMessage("Parola este obligatorie"),
 ]);
-

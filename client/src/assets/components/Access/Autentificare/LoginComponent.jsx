@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import InputField from "../InputField/InputField";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { Link, Form, useNavigation, useActionData } from "react-router-dom";
+import {
+  Link,
+  Form,
+  useNavigation,
+  useActionData,
+  useNavigate,
+} from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
 
 const LoginComponent = ({ serverInputError }) => {
@@ -12,25 +18,40 @@ const LoginComponent = ({ serverInputError }) => {
     isError: null,
     msg: "",
   });
-  const [generalError, setGeneralError] = useState(null);
+  const [generalError, setGeneralError] = useState(true);
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  const serverActionData = useActionData();
+  const navigate = useNavigate();
 
-  const serverError = useActionData();
+  // Redirect in caso di login riuscito (serverActionData contiene ad esempio { msg: "Autentificare reușită" })
+  useEffect(() => {
+    if (
+      serverActionData &&
+      !serverActionData.error &&
+      serverActionData.msg === "Autentificare reușită"
+    ) {
+      navigate("/account");
+    }
+  }, [serverActionData, navigate]);
 
   useEffect(() => {
-    setGeneralError(emailError.isError || passwordError.isError ? true : false);
-    if (!email || !password) {
+    // Abilitiamo il bottone se sono compilati email e password e l'email non ha errori
+    if (!email || !password || emailError.isError) {
       setGeneralError(true);
+    } else {
+      setGeneralError(false);
     }
-  }, [emailError, passwordError, serverInputError]);
+  }, [email, password, emailError]);
 
   return (
     <section className="login">
       <Form method="POST">
         <h2>Intra în contul tău</h2>
-        {serverError && <p className="error-msg">{serverError.msg}</p>}
+        {serverActionData && serverActionData.error && (
+          <p className="error-msg">{serverActionData.msg}</p>
+        )}
         <InputField
           name="email"
           placeholder="nume@email.com"

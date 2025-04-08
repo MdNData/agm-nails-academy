@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from "react";
 import InputField from "../InputField/InputField";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { Link, useNavigation, Form } from "react-router-dom";
+import {
+  Link,
+  useNavigation,
+  Form,
+  useActionData,
+  useNavigate,
+} from "react-router-dom";
 import { validateInput } from "./validateInput.js";
-import { toast } from "react-toastify"; // Importa toastify
+import { toast } from "react-toastify";
 
 const RegisterComponent = ({ serverInputError }) => {
+  // Stato per il nome (campo "nume")
+  const [nume, setNume] = useState("");
+  const [numeError, setNumeError] = useState({ isError: null, msg: "" });
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState({ isError: null, msg: "" });
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState({
-    isError: null,
-    msg: "",
-  });
   const [passwordError, setPasswordError] = useState({
     isError: null,
     msg: "",
   });
+  const [generalError, setGeneralError] = useState(true);
 
-  const [generalError, setGeneralError] = useState(null);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  const serverActionData = useActionData();
+  const navigate = useNavigate();
 
-  // Mostra toast se c'è un errore inviato dal server
   useEffect(() => {
     if (serverInputError) {
       const errorMessage =
@@ -31,22 +40,46 @@ const RegisterComponent = ({ serverInputError }) => {
     }
   }, [serverInputError]);
 
+  // Redirect in caso di registrazione riuscita (serverActionData contiene ad esempio { msg: "Utilizator creat cu succes" })
   useEffect(() => {
-    setGeneralError(emailError.isError || passwordError.isError ? true : false);
-    if (!email || !password) {
-      setGeneralError(true);
+    if (
+      serverActionData &&
+      !serverActionData.error &&
+      serverActionData.msg === "Utilizator creat cu succes"
+    ) {
+      navigate("/account");
     }
-  }, [emailError, passwordError]);
+  }, [serverActionData, navigate]);
 
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  useEffect(() => {
+    const hasError =
+      numeError.isError || emailError.isError || passwordError.isError;
+    setGeneralError(hasError || !nume || !email || !password);
+  }, [numeError, emailError, passwordError, nume, email, password]);
 
   return (
     <section className="register">
       <Form method="POST">
         <h2>Creare cont nou</h2>
+
+        {/* Campo per il nome ("nume") */}
+        <InputField
+          label="Nume"
+          name="nume"
+          placeholder="Nume complet"
+          iconElement={<FiUser />}
+          value={nume}
+          setValue={setNume}
+          error={numeError}
+          setError={setNumeError}
+          validate={validateInput}
+          isSubmitting={isSubmitting}
+          serverInputError={serverInputError}
+        />
+
         <InputField
           name="email"
+          label="Email"
           placeholder="nume@email.com"
           iconElement={<FiMail />}
           value={email}
@@ -57,8 +90,10 @@ const RegisterComponent = ({ serverInputError }) => {
           isSubmitting={isSubmitting}
           serverInputError={serverInputError}
         />
+
         <InputField
           name="password"
+          label="Parola"
           value={password}
           setValue={setPassword}
           type="password"
@@ -69,11 +104,13 @@ const RegisterComponent = ({ serverInputError }) => {
           validate={validateInput}
           isSubmitting={isSubmitting}
         />
+
         <SubmitButton
           text="Înregistrează-te"
           generalError={generalError}
           isSubmitting={isSubmitting}
         />
+
         <Link to="/autentificare">Ai deja cont? Autentifică-te aici</Link>
       </Form>
     </section>

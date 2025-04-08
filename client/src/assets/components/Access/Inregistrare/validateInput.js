@@ -1,31 +1,29 @@
 import {
   checkEmailRequirements,
   checkPasswordRequirements,
-} from "../../../utils/checkInputRequirements";
+} from "../../../utils/checkInputRequirements.js";
 
-export const validateInput = (value, name, setError, serverInputError = "") => {
-  value = value.trim();
+export const validateInput = (value, name, serverInputError = "") => {
+  const trimmedValue = value.trim();
 
-  if (value === "") {
-    setError({
+  if (trimmedValue === "") {
+    return {
       isError: null,
       msg: "",
-    });
-    return;
+    };
   }
 
   if (name === "email") {
-    setError(checkEmailRequirements(value, serverInputError));
-    return;
+    return checkEmailRequirements(trimmedValue, serverInputError);
   }
 
   if (name === "password") {
-    setError(checkPasswordRequirements(value));
-    return;
+    return checkPasswordRequirements(trimmedValue);
   }
 
-  setError({
+  // Per il campo "nume" o altri, non viene effettuato un controllo complesso
+  return {
     isError: false,
     msg: "",
-  });
+  };
 };

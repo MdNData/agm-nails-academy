@@ -1,41 +1,36 @@
 export const checkPasswordRequirements = (password) => {
-  // Check for minimum password length (e.g., at least 8 characters)
   if (password.length < 8) {
     return {
       isError: true,
-      msg: "parola trebuie să aibă cel puțin 8 caractere",
+      msg: "Parola trebuie să conțină cel puțin 8 caractere",
     };
   }
 
-  // Check for lowercase letters
   if (!/[a-z]/.test(password)) {
     return {
       isError: true,
-      msg: "parola trebuie să includă cel puțin o literă mică",
+      msg: "Parola trebuie să includă cel puțin o literă mică",
     };
   }
 
-  // Check for uppercase letters
   if (!/[A-Z]/.test(password)) {
     return {
       isError: true,
-      msg: "parola trebuie să includă cel puțin o literă mare",
+      msg: "Parola trebuie să includă cel puțin o literă mare",
     };
   }
 
-  // Check for numbers
   if (!/\d/.test(password)) {
     return {
       isError: true,
-      msg: "parola trebuie să includă cel puțin un număr",
+      msg: "Parola trebuie să includă cel puțin un număr",
     };
   }
 
-  // Check for special characters (you can customize this character set)
   if (!/[!@#\$%\^&\*\(\)_\+{}\[\]:;<>,.?~\\/-]/.test(password)) {
     return {
       isError: true,
-      msg: "parola trebuie să includă cel puțin un caracter special",
+      msg: "Parola trebuie să includă cel puțin un caracter special",
     };
   }
 
@@ -51,13 +46,13 @@ export const checkEmailRequirements = (email, serverInputError = "") => {
   if (!emailRegex.test(email)) {
     return {
       isError: true,
-      msg: "emailul trebuie sa fie valid",
+      msg: "Emailul trebuie să fie valid",
     };
-  } else if (serverInputError?.response?.data?.msg == "email deja folosit") {
+  } else if (serverInputError?.response?.data?.msg === "email deja folosit") {
     serverInputError.response.data.msg = "";
     return {
       isError: true,
-      msg: "email deja folosit",
+      msg: "Email deja folosită",
     };
   } else {
     return {
