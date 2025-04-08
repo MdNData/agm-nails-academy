@@ -14,6 +14,7 @@ import nodemailer from "nodemailer";
 //import routers
 import authRouter from "./routers/authRouter.js";
 import coursesRouter from "./routers/coursesRouter.js";
+import onlineCoursesRouter from "./routers/onlineCoursesRouter.js";
 import usersRouter from "./routers/usersRouter.js";
 import cartsRoutes from "./routers/cartRoutes.js";
 
@@ -26,12 +27,12 @@ import errorHandlerMiddleware from "./middlewares/errorMiddleware.js";
 
 // Configura il trasportatore con le variabili d'ambiente
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST, 
-  port: process.env.SMTP_PORT, 
-  secure: process.env.SMTP_PORT == 465, 
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_PORT == 465,
   auth: {
-    user: process.env.SMTP_USER, 
-    pass: process.env.SMTP_PASSWORD, 
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
 
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 //routes
 app.use("/api/access", authRouter);
 app.use("/api/cursuri", coursesRouter);
+app.use("/api/cursuri-online", onlineCoursesRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/cart", cartsRoutes);
 

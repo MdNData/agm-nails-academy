@@ -16,6 +16,8 @@ import { action as registerAction } from "./Inregistrare";
 import { loader as courseLoader } from "./Cursuri";
 import { loader as singleCourseLoader } from "../assets/components/Cursuri/SingleCursPage/SingleCursPage";
 import { action as loginAction } from "./Autentificare";
+import { loader as onlineCourseLoader } from "./CursuriOnline";
+import { loader as onlineSingleCourseLoader } from "../assets/components/CursuriOnline/SingleOnlineCoursePage/SingleOnlineCursePage";
 import ProtectedRoute from "../assets/utils/ProtectedRoute";
 import GuestRoute from "../assets/utils/GuestRoute";
 import Cart from "./Cart";
@@ -25,6 +27,7 @@ import PoliticaInscriere from "../assets/components/Terms/PoliticaInscriere";
 import PoliticaReturnare from "../assets/components/Terms/PoliticaReturnare";
 import PoliticaPlata from "../assets/components/Terms/PoliticaPlata";
 import Confidentialitate from "../assets/components/Terms/Confidentialitate";
+import SingleOnlineCursePage from "../assets/components/CursuriOnline/SingleOnlineCoursePage/SingleOnlineCursePage";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +56,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "cursuri-online",
-        element: <CursuriOnline />,
+        id: "cursuri-online",
+        loader: onlineCourseLoader,
+        children: [
+          {
+            index: true,
+            element: <CursuriOnline />,
+          },
+          {
+            path: "curs/:id",
+            element: <SingleOnlineCursePage />,
+            loader: onlineSingleCourseLoader,
+          },
+        ],
       },
       {
         path: "servicii",

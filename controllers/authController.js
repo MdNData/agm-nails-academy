@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { hashPassword, validatePassword } from "../utils/passwordUtils.js";
 import { createJWT, verifyJWT } from "../utils/tokenUtils.js";
 import User from "../models/userModel.js";
+import { sendWelcomeEmail } from "../utils/emailService.js"; // Importa il servizio email
 
 // Controller pentru înregistrare
 export const register = async (req, res) => {
@@ -9,7 +10,7 @@ export const register = async (req, res) => {
     // Hash-ul parolei
     req.body.password = await hashPassword(req.body.password);
 
-    // Crearea utilizatorului - se prevede ca modelul să conțină și câmpul "nume"
+    // Crearea utilizatorului - modelul trebuie să conțină și câmpul "nume"
     const user = await User.create(req.body);
 
     // Crearea token-ului JWT
@@ -24,6 +25,11 @@ export const register = async (req, res) => {
       httpOnly: true,
       expires: new Date(Date.now() + oneDay),
       secure: process.env.NODE_ENV === "production",
+    });
+
+    // Invia emailul de bun venit (dacă eșuează, doar logăm eroarea)
+    sendWelcomeEmail(user.email, user.nume).catch((err) => {
+      console.error("Eroare la trimiterea emailului de bun venit:", err);
     });
 
     // Includi un campo redirectUrl in risposta
@@ -70,7 +76,6 @@ export const login = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    // Includi un campo redirectUrl nella risposta
     res
       .status(StatusCodes.OK)
       .json({ msg: "Autentificare reușită", redirectUrl: "/account" });

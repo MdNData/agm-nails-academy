@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { BsCheckCircle } from "react-icons/bs";
 
 const OnlineCoursesContainer = ({ courses }) => {
   if (!courses || courses.length === 0) {
     return <p>Nu sunt cursuri online disponibile.</p>;
   }
+  console.log(courses)
 
   return (
     <section className="online-courses-container">
@@ -20,6 +22,12 @@ const OnlineCoursesContainer = ({ courses }) => {
             <p className="price">{course.price}</p>
             {course.price2 && <p className="price">{course.price2}</p>}
           </div>
+          {course.isPurchased && (
+            <p style={{ color: "green", fontWeight: "bold" }}>
+              <BsCheckCircle style={{ marginRight: "5px" }} />
+              Curs achiziționat
+            </p>
+          )}
           <Link to={`/cursuri-online/curs/${course._id || course.id}`}>
             Vezi mai multe informații
           </Link>

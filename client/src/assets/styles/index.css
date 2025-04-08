@@ -1996,6 +1996,214 @@ body .online-courses-container article a:hover {
   background-color: white;
   color: rgb(219, 160, 77);
 }
+body .single-curs-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+body .single-curs-container img {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+body .single-curs-container img:hover {
+  transform: scale(1.02);
+}
+body .single-curs-container .curs-content {
+  padding: 0 1.5rem;
+}
+body .single-curs-container .curs-content .duration {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  background: rgba(219, 160, 77, 0.1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+body .single-curs-container .curs-content .duration strong {
+  color: rgb(219, 160, 77);
+  font-weight: 600;
+}
+body .single-curs-container .curs-content .price-selector {
+  margin-bottom: 2rem;
+}
+body .single-curs-container .curs-content .price-selector label {
+  display: block;
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+body .single-curs-container .curs-content .price-selector select {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(219, 160, 77, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237f8c8d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  transition: all 0.3s ease;
+}
+body .single-curs-container .curs-content .price-selector select:focus {
+  outline: none;
+  border-color: rgb(219, 160, 77);
+  box-shadow: 0 0 0 3px rgba(219, 160, 77, 0.2);
+}
+body .single-curs-container .curs-content .selected-price {
+  font-size: 1.2rem;
+  color: rgb(219, 160, 77);
+  font-weight: 600;
+  padding: 1rem;
+  background: rgba(219, 160, 77, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+body .single-curs-container .curs-content .elements {
+  border-top: 2px solid #f8f9fa;
+  padding-top: 2rem;
+}
+body .single-curs-container .curs-content .elements .element-item {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(219, 160, 77, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+body .single-curs-container .curs-content .elements .element-item:hover {
+  transform: translateY(-2px);
+}
+body .single-curs-container .curs-content .elements .element-item .element-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem;
+  background: rgba(219, 160, 77, 0.05);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+body .single-curs-container .curs-content .elements .element-item .element-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+body .single-curs-container .curs-content .elements .element-item .element-header svg {
+  color: rgb(219, 160, 77);
+  transition: transform 0.3s ease;
+}
+body .single-curs-container .curs-content .elements .element-item .element-header:hover {
+  background: rgba(219, 160, 77, 0.1);
+}
+body .single-curs-container .curs-content .elements .element-item .element-details {
+  padding: 1rem 1.5rem;
+  background: white;
+  border-top: 1px solid rgba(219, 160, 77, 0.1);
+}
+body .single-curs-container .curs-content .elements .element-item .element-details li {
+  padding: 0.8rem 0;
+  margin-left: 1rem;
+  position: relative;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+body .single-curs-container .curs-content .elements .element-item .element-details li::before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgb(219, 160, 77);
+  border-radius: 50%;
+}
+body .single-curs-container .curs-content .action-buttons {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+body .single-curs-container .curs-content .action-buttons .btn {
+  padding: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+body .single-curs-container .curs-content .action-buttons .btn-primary {
+  background: rgb(219, 160, 77);
+  color: white;
+  box-shadow: 0 4px 15px rgba(219, 160, 77, 0.3);
+}
+body .single-curs-container .curs-content .action-buttons .btn-primary:hover {
+  background: #d48e2b;
+  transform: translateY(-2px);
+}
+body .single-curs-container .curs-content .action-buttons .btn-secondary {
+  background: white;
+  color: rgb(219, 160, 77);
+  border: 2px solid rgb(219, 160, 77);
+}
+body .single-curs-container .curs-content .action-buttons .btn-secondary:hover {
+  background: rgba(219, 160, 77, 0.1);
+  transform: translateY(-2px);
+}
+body .single-curs-container .curs-content .action-buttons .btn-green {
+  background: #27ae60;
+  color: white;
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+body .single-curs-container .curs-content .action-buttons .btn-green:hover {
+  background: #208d4e;
+  transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+  body .single-curs-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  body .single-curs-container img {
+    height: 250px;
+    margin-bottom: 1rem;
+  }
+  body .single-curs-container .curs-content {
+    padding: 0;
+  }
+  body .single-curs-container .curs-content .duration {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+  body .single-curs-container .curs-content .selected-price {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+  body .single-curs-container .curs-content .action-buttons {
+    grid-template-columns: 1fr;
+  }
+}
 body .products-container {
   display: flex;
   flex-wrap: wrap;
