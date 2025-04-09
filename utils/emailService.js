@@ -15,11 +15,12 @@ const transporter = nodemailer.createTransport({
 
 export const sendWelcomeEmail = async (userEmail, userName) => {
   // Recupera i dettagli configurabili tramite variabili d'ambiente
-  const logoUrl = process.env.APP_LOGO_URL || "https://example.com/logo.png";
-  const loginUrl = process.env.APP_LOGIN_URL || "https://example.com/login";
+  const logoUrl =
+    "https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png";
+  const loginUrl = process.env.APP_LOGIN_URL;
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || '"Your App" <no-reply@example.com>',
+    from: process.env.SMTP_FROM || '"AgMNails" <no-reply@agmnails.com>',
     to: userEmail,
     subject: "Bine ai venit!",
     html: `
