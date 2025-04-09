@@ -40,7 +40,6 @@ const RegisterComponent = ({ serverInputError }) => {
     }
   }, [serverInputError]);
 
-  // Redirect in caso di registrazione riuscita (serverActionData contiene ad esempio { msg: "Utilizator creat cu succes" })
   useEffect(() => {
     if (
       serverActionData &&

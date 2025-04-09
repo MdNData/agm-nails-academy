@@ -19,6 +19,8 @@ import { loader as singleCourseLoader } from "../assets/components/Cursuri/Singl
 import { action as loginAction } from "./Autentificare";
 import { loader as onlineCourseLoader } from "./CursuriOnline";
 import { loader as onlineSingleCourseLoader } from "../assets/components/CursuriOnline/SingleOnlineCoursePage/SingleOnlineCursePage";
+import { action as resetPassword } from "./ForgotPassword";
+import { action as resetTokenPasword } from "./ResetPassword";
 import ProtectedRoute from "../assets/utils/ProtectedRoute";
 import GuestRoute from "../assets/utils/GuestRoute";
 import Cart from "./Cart";
@@ -29,6 +31,7 @@ import PoliticaReturnare from "../assets/components/Terms/PoliticaReturnare";
 import PoliticaPlata from "../assets/components/Terms/PoliticaPlata";
 import Confidentialitate from "../assets/components/Terms/Confidentialitate";
 import SingleOnlineCursePage from "../assets/components/CursuriOnline/SingleOnlineCoursePage/SingleOnlineCursePage";
+import ResetPassword from "./ResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +107,12 @@ export const router = createBrowserRouter([
       {
         path: "forgot-password",
         element: <ForgotPassword />,
+        action: resetPassword,
+      },
+      {
+        path: "reset/:token",
+        element: <ResetPassword />,
+        action: resetTokenPasword,
       },
       {
         path: "cont",

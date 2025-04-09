@@ -12,6 +12,8 @@ import {
   login,
   verifyLogin,
   logout,
+  resetPassword,
+  completeResetPassword,
 } from "../controllers/authController.js";
 import { authenticateUser } from "../middlewares/authMiddleware.js";
 
@@ -27,7 +29,9 @@ router.post("/register", apiLimiter, validateUserRegistration, register);
 
 router.post("/login", apiLimiter, validateUserLogin, login);
 
-router.post("/reset-password", apiLimiter);
+router.post("/reset-password", apiLimiter, resetPassword);
+
+router.post("/reset/:token", apiLimiter, completeResetPassword);
 
 router.get("/verify", authenticateUser, verifyLogin);
 

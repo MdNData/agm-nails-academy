@@ -53,7 +53,7 @@ export const sendWelcomeEmail = async (userEmail, userName) => {
             margin: 20px 0;
             font-size: 16px;
             color: #fff;
-            background-color: #2196f3;
+            background-color: #dba04d;
             text-decoration: none;
             border-radius: 4px;
           "
@@ -67,23 +67,33 @@ export const sendWelcomeEmail = async (userEmail, userName) => {
   return transporter.sendMail(mailOptions);
 };
 
-export const sendForgotPasswordEmail = async (userEmail, resetToken) => {
-  const logoUrl = process.env.APP_LOGO_URL || "https://example.com/logo.png";
-  // Costruisce l'URL per il reset della password usando una variabile d'ambiente (base URL) e il token
-  const resetUrl = `${
-    process.env.APP_RESET_PASSWORD_URL || "https://example.com/reset-password"
-  }/${resetToken}`;
+export const sendForgotPasswordEmail = async (userEmail, resetUrl) => {
+  const logoUrl =
+    "https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png";
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || '"Your App" <no-reply@example.com>',
+    from:
+      process.env.SMTP_FROM ||
+      '"AGM Nails Shop & Academy" <no-reply@agmnails.com>',
     to: userEmail,
     subject: "Resetare parolă",
     html: `
-      <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
-        <img src="${logoUrl}" alt="Logo" style="width: 120px; margin-bottom: 20px;" />
+      <div 
+        style="
+          font-family: Arial, sans-serif;
+          text-align: center;
+          padding: 20px;
+          background-color: #1a1a1a;
+          color: white;
+        ">
+        <img
+          src="https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png"
+          alt="Logo"
+          style="width: 70%; margin-bottom: 20px"
+        />
         <h2>Resetare parolă</h2>
         <p>Se pare că ți-ai uitat parola. Nu-ți face griji! Apasă pe butonul de mai jos pentru a reseta parola:</p>
-        <a href="${resetUrl}" style="display: inline-block; padding: 12px 25px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #f44336; text-decoration: none; border-radius: 4px;">Resetează parola</a>
+        <a href="${resetUrl}" style="display: inline-block; padding: 12px 25px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #dba04d; text-decoration: none; border-radius: 4px;">Resetează parola</a>
         <p>Dacă nu ai solicitat resetarea parolei, te rugăm să ignori acest mesaj.</p>
       </div>
     `,

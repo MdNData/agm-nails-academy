@@ -2342,4 +2342,41 @@ body .legal-page article p {
   line-height: 1.6;
   color: #333;
   margin-bottom: 15px;
+}
+body .overlay-forgot-password {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(148, 148, 148, 0.384);
+  z-index: 55;
+}
+body .overlay-forgot-password div {
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  margin-top: 200px;
+  height: 300px;
+  border-radius: 8px;
+  font-family: Mulish;
+}
+body .overlay-forgot-password div h2 {
+  padding-top: 25px;
+  font-family: "Baskervville SC", sans-serif;
+  color: rgb(219, 160, 77);
+  font-size: 35px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+body .overlay-forgot-password div p {
+  width: 80%;
+  margin: auto;
+  font-size: 16px;
+  line-height: 150%;
+}
+body .overlay-forgot-password div a {
+  font-size: 18px;
 }/*# sourceMappingURL=index.css.map */

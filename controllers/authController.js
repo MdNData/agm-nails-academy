@@ -2,8 +2,10 @@ import { StatusCodes } from "http-status-codes";
 import { hashPassword, validatePassword } from "../utils/passwordUtils.js";
 import { createJWT, verifyJWT } from "../utils/tokenUtils.js";
 import User from "../models/userModel.js";
-import { sendWelcomeEmail } from "../utils/emailService.js"; // Importa il servizio email
-
+import {
+  sendForgotPasswordEmail,
+  sendWelcomeEmail,
+} from "../utils/emailService.js"; // Importa il servizio email
 
 // Controller pentru înregistrare
 export const register = async (req, res) => {
@@ -54,14 +56,14 @@ export const login = async (req, res) => {
     if (!user) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
-        .json({ msg: "Email sau parolă incorectă" });
+        .json({ msg: "Email incorect" });
     }
 
     const isMatch = await validatePassword(password, user.password);
     if (!isMatch) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
-        .json({ msg: "Email sau parolă incorectă" });
+        .json({ msg: "Prolă incorectă" });
     }
 
     const token = createJWT({
@@ -95,11 +97,71 @@ export const resetPassword = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
+      return res.status(StatusCodes.OK).json({
+        msg: "Dacă adresa dvs. de e-mail este corectă, veți primi un e-mail cu instrucțiuni pentru resetarea parolei. Dacă nu primiți e-mailul în următoarele 20 de minute, verificați dacă ați introdus corect adresa de email sau creați un cont nou.",
+      });
+    }
+
+    const resetToken = createJWT({
+      userId: user._id,
+      purpose: "resetPassword",
+    });
+
+    const resetUrl = `https://agm-shop-and-academy.onrender.com/reset/${resetToken}`;
+    sendForgotPasswordEmail(user.email, resetUrl).catch((err) => {
+      console.error("Eroare la trimiterea emailului de resetare parola:", err);
+    });
+
+    res.status(StatusCodes.OK).json({
+      msg: "Dacă adresa dvs. de e-mail este corectă, veți primi un e-mail cu instrucțiuni pentru resetarea parolei. Dacă nu primiți e-mailul în următoarele 20 de minute, verificați dacă ați introdus corect adresa de email sau creați un cont nou.",
+    });
+  } catch (error) {
+    console.error("Eroare la trimiterea cereri:", error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      msg: "Eroare internă. Vă rugăm să încercați din nou mai târziu.",
+    });
+  }
+};
+
+//controller completare reset parola
+export const completeResetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: "Parolele nu corespund." });
+  }
+
+  try {
+    const decoded = verifyJWT(token);
+    if (decoded.purpose !== "resetPassword") {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ msg: "Email inexistent in basa de date." });
+        .json({ error: "Token expirat sau nu este valid." });
     }
-  } catch (error) {}
+
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "Utilizatorul nu a fost gasit." });
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
+    user.password = hashedPassword;
+
+    await user.save();
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: "Parola a fost actualizata cu success!" });
+  } catch (error) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: "Token expirat sau nu este valid." });
+  }
 };
 
 // Controller pentru verificarea autentificării

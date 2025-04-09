@@ -8,7 +8,8 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await apiFetch.post("/access/reset-password", data);
+    const response = await apiFetch.post("/access/reset-password", data);
+    return response;
   } catch (error) {
     return error.response?.data || error;
   }
