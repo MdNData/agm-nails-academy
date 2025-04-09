@@ -20,16 +20,45 @@ export const sendWelcomeEmail = async (userEmail, userName) => {
   const loginUrl = process.env.APP_LOGIN_URL;
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || '"AgMNails" <no-reply@agmnails.com>',
+    from:
+      process.env.SMTP_FROM ||
+      '"AGM Nails Shop & Academy" <no-reply@agmnails.com>',
     to: userEmail,
     subject: "Bine ai venit!",
     html: `
-      <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
-        <img src="${logoUrl}" alt="Logo" style="width: 120px; margin-bottom: 20px;" />
+      <div
+        style="
+          font-family: Arial, sans-serif;
+          text-align: center;
+          padding: 20px;
+          background-color: #1a1a1a;
+          color: white;
+        "
+      >
+        <img
+          src="https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png"
+          alt="Logo"
+          style="width: 70%; margin-bottom: 20px"
+        />
         <h2>Bine ai venit, ${userName}!</h2>
-        <p>Îți mulțumim că te-ai înregistrat. Contul tău a fost creat cu succes.</p>
+        <p>
+          Îți mulțumim că te-ai înregistrat. Contul tău a fost creat cu succes.
+        </p>
         <p>Pentru a accesa contul tău, apasă pe butonul de mai jos:</p>
-        <a href="${loginUrl}" style="display: inline-block; padding: 12px 25px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #2196F3; text-decoration: none; border-radius: 4px;">Accesează contul</a>
+        <a
+          href="${loginUrl}"
+          style="
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #fff;
+            background-color: #2196f3;
+            text-decoration: none;
+            border-radius: 4px;
+          "
+          >Accesează contul</a
+        >
         <p>Dacă nu ai creat acest cont, te rugăm să ignori acest mesaj.</p>
       </div>
     `,
