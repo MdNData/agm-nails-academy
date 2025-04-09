@@ -245,6 +245,7 @@ body div.nav-container nav.navbar .access-menu-container div.auth-button {
 body div.nav-container nav.navbar .access-menu-container .cart-button {
   grid-area: cart;
   text-align: center;
+  position: relative;
 }
 body div.nav-container nav.navbar .access-menu-container .cart-button a {
   display: block;
@@ -256,6 +257,23 @@ body div.nav-container nav.navbar .access-menu-container .cart-button a {
 body div.nav-container nav.navbar .access-menu-container .cart-button a:hover {
   color: rgb(219, 160, 77);
 }
+body div.nav-container nav.navbar .access-menu-container .cart-button .cart-count {
+  position: absolute;
+  right: 3px;
+  bottom: -5px;
+  background-color: rgb(219, 160, 77);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  min-width: 25px;
+  min-height: 25px;
+}
 @media screen and (min-width: 800px) {
   body div.nav-container nav.navbar .access-menu-container .cart-button {
     margin: auto;
@@ -263,6 +281,11 @@ body div.nav-container nav.navbar .access-menu-container .cart-button a:hover {
   }
   body div.nav-container nav.navbar .access-menu-container .cart-button a {
     font-size: 28px;
+    font-family: Mulish;
+  }
+  body div.nav-container nav.navbar .access-menu-container .cart-button .cart-count {
+    bottom: -5px;
+    right: -8px;
   }
 }
 body div.nav-container nav.navbar .access-menu-container .nav-menu-btn {
@@ -1053,13 +1076,21 @@ body section.register a {
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.17);
   margin-top: 25px;
 }
+body section.login .forgot-password-link,
+body section.register .forgot-password-link {
+  margin-top: 8px;
+}
+body section.login a:hover,
+body section.register a:hover {
+  color: rgba(185, 112, 11, 0.801);
+}
 body section.login form,
 body section.register form {
   min-width: 280px;
   width: 85vw;
   max-width: 450px;
   margin: auto;
-  margin-top: 15px;
+  margin-top: 5px;
   display: block;
   border: 1px solid rgba(128, 128, 128, 0.22);
   border-top: 4px solid rgba(210, 148, 61, 0.5215686275);

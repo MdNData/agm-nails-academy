@@ -22,7 +22,7 @@ const CartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true, // Ogni utente ha un solo carrello
+      unique: true, 
     },
     items: [CartItemSchema],
   },

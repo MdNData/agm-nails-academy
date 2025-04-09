@@ -73,6 +73,7 @@ const LoginComponent = ({ serverInputError }) => {
           setError={setPasswordError}
           isSubmitting={isSubmitting}
         />
+        <Link className="forgot-password-link" to="/forgot-password">Ai uitat parola? Apasa aici!</Link>
         <SubmitButton
           text="Autentifică-te"
           generalError={generalError}

@@ -6,11 +6,16 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [cartItemCount, setCartItemCount] = useState(null);
 
   const checkLogin = async () => {
     try {
       const response = await apiFetch.get("/access/verify");
       setUser(response.data.user);
+      if (response.data.user) {
+        const response = await apiFetch.get("/cart/item-count");
+        setCartItemCount(response.data.itemCount);
+      }
     } catch (error) {
       setUser(null);
     } finally {
@@ -32,7 +37,16 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        loading,
+        logout,
+        cartItemCount,
+        setCartItemCount,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

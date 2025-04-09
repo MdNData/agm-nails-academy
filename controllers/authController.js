@@ -4,6 +4,7 @@ import { createJWT, verifyJWT } from "../utils/tokenUtils.js";
 import User from "../models/userModel.js";
 import { sendWelcomeEmail } from "../utils/emailService.js"; // Importa il servizio email
 
+
 // Controller pentru înregistrare
 export const register = async (req, res) => {
   try {
@@ -85,6 +86,20 @@ export const login = async (req, res) => {
       msg: "Eroare internă. Vă rugăm să încercați din nou mai târziu.",
     });
   }
+};
+
+//controller reset parola
+export const resetPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "Email inexistent in basa de date." });
+    }
+  } catch (error) {}
 };
 
 // Controller pentru verificarea autentificării

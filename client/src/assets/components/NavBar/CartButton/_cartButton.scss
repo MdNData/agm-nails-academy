@@ -1,6 +1,7 @@
 .cart-button {
   grid-area: cart;
   text-align: center;
+  position: relative;
 
   a {
     display: block;
@@ -14,12 +15,36 @@
     }
   }
 
+  .cart-count {
+    position: absolute;
+    right: 3px;
+    bottom: -5px;
+    background-color: rgb(219, 160, 77);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    min-width: 25px;
+    min-height: 25px;
+  }
+
   @media screen and (min-width: 800px) {
     margin: auto;
     margin-right: 1.5vw;
 
     a {
       font-size: 28px;
+      font-family: Mulish;
+    }
+
+    .cart-count {
+      bottom: -5px;
+      right: -8px;
     }
   }
 }

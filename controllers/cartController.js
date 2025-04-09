@@ -21,6 +21,20 @@ export const getCart = async (req, res) => {
   }
 };
 
+//Conta il numero di prodotti nel carrello
+export const getCountItemCart = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ user: req.user.userId });
+
+    if (!cart) {
+      return res.status(StatusCodes.OK).json({ itemCount: 0 });
+    }
+    console.log(cart.items.length);
+    const nmCart = cart.items.length;
+    res.status(StatusCodes.OK).json({ itemCount: nmCart });
+  } catch (error) {}
+};
+
 // Aggiunge o aggiorna un corso nel carrello (già presente)
 export const addCourseToCart = async (req, res) => {
   try {

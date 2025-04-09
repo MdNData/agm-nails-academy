@@ -7,6 +7,7 @@ import Produse from "./Produse";
 import Contact from "./Contact";
 import Autentificare from "./Autentificare";
 import Inregistrare from "./Inregistrare";
+import ForgotPassword from "./ForgotPassword";
 import Error from "./Error";
 import Cont from "./Cont";
 import AboutMe from "./AboutMe";
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
           </GuestRoute>
         ),
         action: registerAction,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
       },
       {
         path: "cont",

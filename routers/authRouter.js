@@ -27,6 +27,8 @@ router.post("/register", apiLimiter, validateUserRegistration, register);
 
 router.post("/login", apiLimiter, validateUserLogin, login);
 
+router.post("/reset-password", apiLimiter);
+
 router.get("/verify", authenticateUser, verifyLogin);
 
 router.post("/logout", logout);

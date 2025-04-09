@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema(
       required: false,
       trim: true,
     },
+    tempPassword: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,

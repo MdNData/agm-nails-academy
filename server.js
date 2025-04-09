@@ -9,7 +9,6 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
-import nodemailer from "nodemailer";
 
 //import routers
 import authRouter from "./routers/authRouter.js";
@@ -25,16 +24,7 @@ import path from "path";
 
 import errorHandlerMiddleware from "./middlewares/errorMiddleware.js";
 
-// Configura il trasportatore con le variabili d'ambiente
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: process.env.SMTP_PORT == 465,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
