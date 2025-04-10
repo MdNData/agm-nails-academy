@@ -3,7 +3,6 @@ section.register {
   display: block;
   padding: 20vh 0 30vh 0;
   background-color: rgba(223, 182, 125, 0.2117647059);
-  
 
   h2 {
     text-align: center;
@@ -23,9 +22,23 @@ section.register {
     margin-top: 25px;
   }
 
+  p.accept-terms-button {
+    max-width: 350px;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 12px;
+    text-align: center;
+
+    a {
+      padding: 0;
+      margin: 0;
+      display: inline;
+      font-size: 12px;
+    }
+  }
+
   .forgot-password-link {
     margin-top: 8px;
-    
   }
 
   a:hover {

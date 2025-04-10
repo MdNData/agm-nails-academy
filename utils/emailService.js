@@ -38,7 +38,7 @@ export const sendWelcomeEmail = async (userEmail, userName) => {
         <img
           src="https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png"
           alt="Logo"
-          style="width: 70%; margin-bottom: 20px"
+          style="width: 70%; margin-bottom: 20px; max-width: 350px"
         />
         <h2>Bine ai venit, ${userName}!</h2>
         <p>
@@ -89,7 +89,7 @@ export const sendForgotPasswordEmail = async (userEmail, resetUrl) => {
         <img
           src="https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png"
           alt="Logo"
-          style="width: 70%; margin-bottom: 20px"
+          style="width: 70%; margin-bottom: 20px; max-width: 350px"
         />
         <h2>Resetare parolă</h2>
         <p>Se pare că ți-ai uitat parola. Nu-ți face griji! Apasă pe butonul de mai jos pentru a reseta parola:</p>

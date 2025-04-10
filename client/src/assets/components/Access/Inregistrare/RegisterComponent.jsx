@@ -136,7 +136,12 @@ const RegisterComponent = ({ serverInputError }) => {
           validate={checkPasswordRequirements}
           isSubmitting={isSubmitting}
         />
-
+        <p className="accept-terms-button">
+          Apasand butonul inregistreaza-te accepti
+          <Link to={"/termeni"}> termeni si conditiile</Link>, datele dvs.
+          personale vor fi utilizate pentru a putea procesa comanda și gestiona
+          contul de client.
+        </p>
         <SubmitButton
           text="Înregistrează-te"
           generalError={generalError}
