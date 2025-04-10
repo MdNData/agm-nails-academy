@@ -10,17 +10,18 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { validateInput } from "./validateInput.js";
+import { checkPasswordRequirements } from "../../../utils/checkInputRequirements.js";
 import { toast } from "react-toastify";
 
 const RegisterComponent = ({ serverInputError }) => {
-  // Stato per il nome (campo "nume")
+  // Stato per il nome ("nume")
   const [nume, setNume] = useState("");
-  const [numeError, setNumeError] = useState({ isError: null, msg: "" });
+  const [numeError, setNumeError] = useState({ isError: false, msg: "" });
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState({ isError: null, msg: "" });
+  const [emailError, setEmailError] = useState({ isError: false, msg: "" });
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState({
-    isError: null,
+    isError: false,
     msg: "",
   });
   const [generalError, setGeneralError] = useState(true);
@@ -30,6 +31,7 @@ const RegisterComponent = ({ serverInputError }) => {
   const serverActionData = useActionData();
   const navigate = useNavigate();
 
+  // Notifica eventuali errori provenienti dal server
   useEffect(() => {
     if (serverInputError) {
       const errorMessage =
@@ -40,6 +42,7 @@ const RegisterComponent = ({ serverInputError }) => {
     }
   }, [serverInputError]);
 
+  // Gestione reindirizzamento in caso di registrazione avvenuta con successo
   useEffect(() => {
     if (
       serverActionData &&
@@ -50,18 +53,46 @@ const RegisterComponent = ({ serverInputError }) => {
     }
   }, [serverActionData, navigate]);
 
+  // Effetto che controlla l'aggiornamento dello stato di validità complessivo del form
   useEffect(() => {
     const hasError =
       numeError.isError || emailError.isError || passwordError.isError;
     setGeneralError(hasError || !nume || !email || !password);
   }, [numeError, emailError, passwordError, nume, email, password]);
 
+  // Handler per il submit del form: viene controllata la validità di tutti i campi
+  const handleSubmit = (e) => {
+    // Ricalcola le validazioni per ciascun campo
+    const numeValidation = validateInput(nume, "nume", serverInputError);
+    const emailValidation = validateInput(email, "email", serverInputError);
+    const passwordValidation = checkPasswordRequirements(password);
+    setNumeError(numeValidation);
+    setEmailError(emailValidation);
+    setPasswordError(passwordValidation);
+
+    // Se c'è un errore o se uno dei campi è vuoto, blocca l'invio
+    if (
+      numeValidation.isError ||
+      emailValidation.isError ||
+      passwordValidation.isError ||
+      !nume ||
+      !email ||
+      !password
+    ) {
+      e.preventDefault();
+      toast.error(
+        "Vă rugăm să corectați erorile înainte de a trimite formularul."
+      );
+      return;
+    }
+  };
+
   return (
     <section className="register">
-      <Form method="POST">
+      <Form method="POST" onSubmit={handleSubmit}>
         <h2>Creare cont nou</h2>
 
-        {/* Campo per il nome ("nume") */}
+        {/* Campo "nume" */}
         <InputField
           label="Nume"
           name="nume"
@@ -76,6 +107,7 @@ const RegisterComponent = ({ serverInputError }) => {
           serverInputError={serverInputError}
         />
 
+        {/* Campo "email" */}
         <InputField
           name="email"
           label="Email"
@@ -90,9 +122,10 @@ const RegisterComponent = ({ serverInputError }) => {
           serverInputError={serverInputError}
         />
 
+        {/* Campo "password" */}
         <InputField
           name="password"
-          label="Parola"
+          label="Parolă"
           value={password}
           setValue={setPassword}
           type="password"
@@ -100,7 +133,7 @@ const RegisterComponent = ({ serverInputError }) => {
           iconElement={<FiLock />}
           error={passwordError}
           setError={setPasswordError}
-          validate={validateInput}
+          validate={checkPasswordRequirements}
           isSubmitting={isSubmitting}
         />
 

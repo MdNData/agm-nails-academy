@@ -11,7 +11,7 @@ const InputField = ({
   iconElement = "",
   error,
   setError,
-  validate,
+  validate, // funzione di validazione opzionale
   isSubmitting,
   serverInputError,
   setValue,
@@ -22,16 +22,22 @@ const InputField = ({
     const inputValue = e.target.value;
     setValue(inputValue);
 
-    if (isTouched) {
+    // Imposta isTouched su true al primo carattere digitato
+    if (!isTouched) setIsTouched(true);
+
+    // Esegui la validazione in tempo reale
+    if (typeof validate === "function") {
       const validationResult = validate(inputValue, name, serverInputError);
       setError(validationResult);
     }
   };
 
   const handleBlur = () => {
-    setIsTouched(true);
-    const validationResult = validate(value, name, serverInputError);
-    setError(validationResult);
+    if (!isTouched) setIsTouched(true);
+    if (typeof validate === "function") {
+      const validationResult = validate(value, name, serverInputError);
+      setError(validationResult);
+    }
   };
 
   let borderColor = "rgb(209, 213, 219)";

@@ -1,6 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import { hashPassword, validatePassword } from "../utils/passwordUtils.js";
-import { createJWT, verifyJWT } from "../utils/tokenUtils.js";
+import {
+  createJWT,
+  verifyJWT,
+  verifyJWTReset,
+  createJWTReset,
+} from "../utils/tokenUtils.js";
 import User from "../models/userModel.js";
 import {
   sendForgotPasswordEmail,
@@ -12,6 +17,8 @@ export const register = async (req, res) => {
   try {
     // Hash-ul parolei
     req.body.password = await hashPassword(req.body.password);
+
+    req.body.passwordChangedAt = Date.now();
 
     // Crearea utilizatorului - modelul trebuie să conțină și câmpul "nume"
     const user = await User.create(req.body);
@@ -102,10 +109,13 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    const resetToken = createJWT({
-      userId: user._id,
-      purpose: "resetPassword",
-    });
+    const resetToken = createJWTReset(
+      {
+        userId: user._id,
+        purpose: "resetPassword",
+      },
+      user
+    );
 
     const resetUrl = `https://agm-shop-and-academy.onrender.com/reset/${resetToken}`;
     sendForgotPasswordEmail(user.email, resetUrl).catch((err) => {
@@ -135,7 +145,7 @@ export const completeResetPassword = async (req, res) => {
   }
 
   try {
-    const decoded = verifyJWT(token);
+    const decoded = await verifyJWTReset(token);
     if (decoded.purpose !== "resetPassword") {
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -151,6 +161,7 @@ export const completeResetPassword = async (req, res) => {
 
     const hashedPassword = await hashPassword(newPassword);
     user.password = hashedPassword;
+    user.passwordChangedAt = Date.now();
 
     await user.save();
 
