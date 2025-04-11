@@ -869,154 +869,202 @@ body .cursuri .curs-container article a:hover {
   background-color: white;
   color: rgb(219, 160, 77);
 }
-body .single-curs-page article {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 700px;
-  width: 90%;
-  background-color: #ffffff;
+body .single-curs-page .single-curs-container {
+  background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  max-width: 800px;
+  margin: 2rem auto;
   border-top: 5px solid rgb(219, 160, 77);
-  gap: 20px;
-  /* Sezione per ogni elemento espandibile */
+  transition: transform 0.3s ease;
+  width: 80%;
 }
-@media screen and (min-width: 490px) {
-  body .single-curs-page article {
-    width: 80%;
-  }
+body .single-curs-page .single-curs-container:hover {
+  transform: translateY(-5px);
 }
-body .single-curs-page article img {
+body .single-curs-page .single-curs-container img {
   width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
   display: block;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  max-width: 650px;
+  border-radius: 0;
 }
-body .single-curs-page article > div {
-  width: 100%;
-  background-color: rgba(219, 160, 77, 0.08);
-  padding: 15px 20px;
-  border: 1px solid rgba(219, 160, 77, 0.3);
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+body .single-curs-page .single-curs-container .curs-content {
+  padding: 2rem;
 }
-body .single-curs-page article > div:hover {
-  background-color: rgba(219, 160, 77, 0.15);
+body .single-curs-page .single-curs-container .curs-content .price-selector {
+  margin-bottom: 2rem;
 }
-body .single-curs-page article > div:last-of-type {
-  border-bottom: 1px solid rgba(219, 160, 77, 0.3);
-}
-body .single-curs-page article h3 {
-  font-family: "Urbanist", sans-serif;
-  font-size: 22px;
+body .single-curs-page .single-curs-container .curs-content .price-selector label {
+  display: block;
+  font-family: "Mulish", sans-serif;
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
   font-weight: 600;
-  color: #333;
-  margin: 5px 0;
+}
+body .single-curs-page .single-curs-container .curs-content .price-selector select {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(219, 160, 77, 0.3);
+  border-radius: 8px;
+  font-family: "Mulish", sans-serif;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237f8c8d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  transition: all 0.3s ease;
+}
+body .single-curs-page .single-curs-container .curs-content .price-selector select:focus {
+  outline: none;
+  border-color: rgb(219, 160, 77);
+  box-shadow: 0 0 0 3px rgba(219, 160, 77, 0.2);
+}
+body .single-curs-page .single-curs-container .element-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(219, 160, 77, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+body .single-curs-page .single-curs-container .element-item:hover {
+  transform: translateY(-2px);
+}
+body .single-curs-page .single-curs-container .element-item .element-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1.2rem;
+  background: rgba(219, 160, 77, 0.05);
   cursor: pointer;
-}
-body .single-curs-page article h3 svg {
-  margin-bottom: -5px;
-  transition: transform 0.3s ease;
-}
-body .single-curs-page article ul {
-  padding: 0;
-  list-style: none;
-  /* Per eventuali sotto-sezioni */
-}
-body .single-curs-page article ul .circle {
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  margin-bottom: 1px;
-  margin-right: 8px;
-  border-radius: 50px;
-  background-color: rgb(219, 160, 77);
-}
-body .single-curs-page article ul li {
-  font-family: "Mulish", sans-serif;
-  font-size: 18px;
-  letter-spacing: -0.5px;
-  margin-bottom: 8px;
-  padding: 4px 8px;
-  border-radius: 6px;
   transition: background-color 0.3s ease;
 }
-body .single-curs-page article ul li:hover {
-  background-color: #f3f3f3;
-}
-body .single-curs-page article ul div {
-  border-bottom: none;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(219, 160, 77, 0.3);
-}
-body .single-curs-page article ul div:last-child {
-  border-bottom: 1px solid rgba(219, 160, 77, 0.3);
-}
-body .single-curs-page article ul div h3 {
+body .single-curs-page .single-curs-container .element-item .element-header h3 {
   margin: 0;
-  padding: 10px;
+  color: #2c3e50;
+  font-family: "Urbanist", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
-body .single-curs-page article ul div ul {
-  padding: 5px 0;
+body .single-curs-page .single-curs-container .element-item .element-header .arrow-icon {
+  color: rgb(219, 160, 77);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
-body .single-curs-page article .curs-prices {
-  width: 100%;
-  padding: 10px 0;
+body .single-curs-page .single-curs-container .element-item .element-header:hover {
+  background: rgba(219, 160, 77, 0.1);
+}
+body .single-curs-page .single-curs-container .element-item .element-details {
+  padding: 1rem 1.5rem;
+  background: white;
+  border-top: 1px solid rgba(219, 160, 77, 0.1);
+}
+body .single-curs-page .single-curs-container .element-item .element-details .detail-item {
+  padding: 0.8rem 0;
+  margin-left: 1rem;
+  position: relative;
+  color: #7f8c8d;
+  line-height: 1.6;
+  font-family: "Mulish", sans-serif;
+}
+body .single-curs-page .single-curs-container .element-item .element-details .detail-item .circle {
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgb(219, 160, 77);
+  border-radius: 50%;
+}
+body .single-curs-page .single-curs-container .element-item .element-details .sub-section {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(219, 160, 77, 0.2);
+}
+body .single-curs-page .single-curs-container .element-item .element-details .sub-section .element-sub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  cursor: pointer;
+}
+body .single-curs-page .single-curs-container .element-item .element-details .sub-section .element-sub-header h4 {
+  font-family: "Urbanist", sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  color: #2c3e50;
+  font-weight: 600;
+}
+body .single-curs-page .single-curs-container .element-item .element-details .sub-section .sub-element-details {
+  padding-left: 1rem;
+}
+body .single-curs-page .single-curs-container .action-buttons {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+body .single-curs-page .single-curs-container .action-buttons .btn {
+  padding: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
   text-align: center;
-}
-body .single-curs-page article .curs-prices h3 {
-  margin: 15px 0 20px;
-}
-body .single-curs-page article .curs-prices label {
   display: flex;
   align-items: center;
-  font-family: "Mulish", sans-serif;
-  font-size: 18px;
-  letter-spacing: -0.5px;
-  margin: 10px 0 0 10px;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  justify-content: center;
+  gap: 0.8rem;
 }
-body .single-curs-page article .curs-prices label input {
-  margin-right: 15px;
-  cursor: pointer;
-  transform: scale(1.2);
-}
-body .single-curs-page article section.buttons {
-  width: 100%;
-}
-body .single-curs-page article section.buttons a,
-body .single-curs-page article section.buttons button {
-  display: block;
-  border: 1px solid rgb(219, 160, 77);
-  text-align: center;
-  padding: 12px 20px;
-  margin: 15px auto 0 auto;
+body .single-curs-page .single-curs-container .action-buttons .btn-primary {
+  background: rgb(219, 160, 77);
   color: white;
-  background-color: rgb(219, 160, 77);
-  text-decoration: none;
-  font-family: "Mulish", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 8px;
-  max-width: 400px;
-  min-width: 280px;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(219, 160, 77, 0.3);
 }
-body .single-curs-page article section.buttons a:hover,
-body .single-curs-page article section.buttons button:hover {
-  background-color: white;
+body .single-curs-page .single-curs-container .action-buttons .btn-primary:hover {
+  background: #d48e2b;
+  transform: translateY(-2px);
+}
+body .single-curs-page .single-curs-container .action-buttons .btn-secondary {
+  background: white;
   color: rgb(219, 160, 77);
+  border: 2px solid rgb(219, 160, 77);
+}
+body .single-curs-page .single-curs-container .action-buttons .btn-secondary:hover {
+  background: rgba(219, 160, 77, 0.1);
+  transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+  body .single-curs-page .single-curs-container {
+    margin: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  body .single-curs-page .single-curs-container img {
+    height: 250px;
+  }
+  body .single-curs-page .single-curs-container .curs-content {
+    padding: 1.5rem;
+  }
+  body .single-curs-page .single-curs-container .curs-content .element-item .element-header {
+    padding: 1rem;
+  }
+  body .single-curs-page .single-curs-container .curs-content .element-item .element-details {
+    padding: 0.5rem 1rem;
+  }
+  body .single-curs-page .single-curs-container .curs-content .action-buttons {
+    grid-template-columns: 1fr;
+  }
+  body .single-curs-page .single-curs-container .curs-content .action-buttons .btn {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
 }
 body .single-curs-page div.title {
   padding: 30px;
@@ -2170,6 +2218,7 @@ body .single-curs-container .curs-content .elements .element-item .element-detai
   position: relative;
   color: #7f8c8d;
   line-height: 1.6;
+  list-style: none;
 }
 body .single-curs-container .curs-content .elements .element-item .element-details li::before {
   content: "";
@@ -2250,7 +2299,7 @@ body .single-curs-container .curs-content .action-buttons .btn-green:hover {
     grid-template-columns: 1fr;
   }
 }
-body .products-container {
+body .curs-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -2259,7 +2308,7 @@ body .products-container {
   max-width: 1000px;
   margin: auto;
 }
-body .products-container article {
+body .curs-container article {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -2271,32 +2320,32 @@ body .products-container article {
   transition: transform 0.3s ease;
   border-top: 5px solid rgb(219, 160, 77);
 }
-body .products-container article:hover {
+body .curs-container article:hover {
   transform: translateY(-5px);
 }
-body .products-container article img {
+body .curs-container article img {
   width: 100%;
   display: block;
 }
-body .products-container article .titles {
+body .curs-container article .titles {
   padding: 15px;
   text-align: center;
 }
-body .products-container article .titles h2 {
+body .curs-container article .titles h2 {
   font-family: "Urbanist", sans-serif;
   font-size: 24px;
   font-weight: 600;
   color: #111827;
   margin-bottom: 5px;
 }
-body .products-container article .titles h3 {
+body .curs-container article .titles h3 {
   font-family: "Mulish", sans-serif;
   font-size: 18px;
   font-weight: 400;
   color: #555;
   margin-bottom: 5px;
 }
-body .products-container article .price-container {
+body .curs-container article .price-container {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -2304,7 +2353,7 @@ body .products-container article .price-container {
   flex-direction: column;
   gap: 5px;
 }
-body .products-container article .price-container .price {
+body .curs-container article .price-container .price {
   font-family: "Mulish", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -2314,7 +2363,7 @@ body .products-container article .price-container .price {
   border-radius: 20px;
   text-align: center;
 }
-body .products-container article a {
+body .curs-container article a {
   margin: 15px;
   display: block;
   text-align: center;
@@ -2329,7 +2378,7 @@ body .products-container article a {
   text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-body .products-container article a:hover {
+body .curs-container article a:hover {
   background-color: white;
   color: rgb(219, 160, 77);
 }

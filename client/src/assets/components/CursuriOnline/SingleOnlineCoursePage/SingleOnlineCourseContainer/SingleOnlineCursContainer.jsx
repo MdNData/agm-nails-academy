@@ -65,7 +65,7 @@ const SingleOnlineCursContainer = ({ course }) => {
   if (!course) return <div>Încărcare curs...</div>;
 
   return (
-    <div className="single-curs-container">
+    <article className="single-curs-container">
       <img
         src={course.img || "/images/placeholder.jpg"}
         alt={course.title || "Course Image"}
@@ -141,6 +141,14 @@ const SingleOnlineCursContainer = ({ course }) => {
               <button className="btn btn-primary" onClick={handleAddToCart}>
                 Adaugă în coș
               </button>
+              <a
+                href="https://api.whatsapp.com/send?phone=40770541506&text=Bun%C4%83%2C%20sunt%20interesat%C4%83%20la%20"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                Sau întreabă-mă pe WhatsApp
+              </a>
               <Link className="btn btn-secondary" to="/cart">
                 Vezi coșul
               </Link>
@@ -148,7 +156,7 @@ const SingleOnlineCursContainer = ({ course }) => {
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

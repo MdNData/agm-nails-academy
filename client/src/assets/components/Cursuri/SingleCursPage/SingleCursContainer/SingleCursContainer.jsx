@@ -60,7 +60,7 @@ const SingleCursContainer = ({ course }) => {
 
   return (
     <article className="single-curs-container">
-      <img src={course.img} alt={course.title} style={{ width: "100%" }} />
+      <img src={course.img} alt={course.title} />
 
       <div className="curs-content">
         <div className="price-selector">
@@ -92,46 +92,46 @@ const SingleCursContainer = ({ course }) => {
             >
               <h3>{data.title}</h3>
               {openDescription[index] ? (
-                <MdKeyboardArrowUp />
+                <MdKeyboardArrowUp className="arrow-icon" />
               ) : (
-                <MdKeyboardArrowDown />
+                <MdKeyboardArrowDown className="arrow-icon" />
               )}
             </div>
 
             {openDescription[index] && (
-              <ul className="element-details">
+              <div className="element-details">
                 {data.details?.map((desc, i) => (
-                  <li key={i}>
+                  <div key={i} className="detail-item">
                     <span className="circle"></span> {desc}
-                  </li>
+                  </div>
                 ))}
 
                 {data.days?.map((day, j) => (
-                  <div key={j}>
+                  <div key={j} className="sub-section">
                     <div
                       className="element-sub-header"
                       onClick={() => toggleDescription(index, j)}
                     >
                       <h4>{day.title}</h4>
                       {openDescription[`${index}-${j}`] ? (
-                        <MdKeyboardArrowUp />
+                        <MdKeyboardArrowUp className="arrow-icon" />
                       ) : (
-                        <MdKeyboardArrowDown />
+                        <MdKeyboardArrowDown className="arrow-icon" />
                       )}
                     </div>
 
                     {openDescription[`${index}-${j}`] && (
-                      <ul className="sub-element-details">
+                      <div className="sub-element-details">
                         {day.lista?.map((lesson, k) => (
-                          <li key={k}>
+                          <div key={k} className="detail-item">
                             <span className="circle"></span> {lesson}
-                          </li>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     )}
                   </div>
                 ))}
-              </ul>
+              </div>
             )}
           </div>
         ))}

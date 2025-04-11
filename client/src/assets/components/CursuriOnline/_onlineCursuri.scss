@@ -15,6 +15,7 @@ $course-card-max-width: 400px;
   max-width: $courses-container-max-width;
   margin: auto;
 
+
   article {
     background-color: #fff;
     border-radius: 12px;
@@ -245,6 +246,7 @@ $text-light: #7f8c8d;
             position: relative;
             color: $text-light;
             line-height: 1.6;
+            list-style: none;
 
             &::before {
               content: '';
