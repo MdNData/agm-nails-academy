@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import cart_img from "../assets/images/empty-cart-3.png";
 
 const Cart = () => {
-  const [cart, setCart] = useState({ items: [] }); // Inizializza con items vuoto
+  const [cart, setCart] = useState({ items: [] });
   const [userAddress, setUserAddress] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,6 +14,7 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       const response = await apiFetch.get("/cart");
+      // Assicurati che il backend ritorni la struttura { cart: { items: [...] } }
       setCart(response.data?.cart || { items: [] });
     } catch (err) {
       console.error("Eroare la obținerea coșului:", err);
@@ -46,7 +47,7 @@ const Cart = () => {
   const handleRemoveItem = async (itemId) => {
     try {
       await apiFetch.delete(`/cart/${itemId}`);
-      await fetchCart(); // Ricarica il carrello dopo la rimozione
+      await fetchCart();
       toast.success("Cursul a fost eliminat din coș!");
     } catch (error) {
       console.error("Eroare la eliminarea cursului din coș:", error);

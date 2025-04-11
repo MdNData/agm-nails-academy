@@ -16,6 +16,7 @@ import coursesRouter from "./routers/coursesRouter.js";
 import onlineCoursesRouter from "./routers/onlineCoursesRouter.js";
 import usersRouter from "./routers/usersRouter.js";
 import cartsRoutes from "./routers/cartRoutes.js";
+import enrollmentRouter from "./routers/enrollmentRouter.js";
 
 //public
 import { dirname } from "path";
@@ -23,8 +24,6 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 import errorHandlerMiddleware from "./middlewares/errorMiddleware.js";
-
-
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -53,6 +52,7 @@ app.use("/api/cursuri", coursesRouter);
 app.use("/api/cursuri-online", onlineCoursesRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/cart", cartsRoutes);
+app.use("/api/enroll", enrollmentRouter);
 
 //default route
 app.get("*", (req, res) => {

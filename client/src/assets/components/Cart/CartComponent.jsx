@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 
 const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
   const parsePrice = (priceStr) => {
-    return parseFloat(priceStr.replace(/\./g, "").replace(",", "."));
+    if (priceStr === "Gratis" || priceStr === "") return 0;
+    const cleanedPrice = priceStr
+      .replace(/\./g, "")
+      .replace(",", ".")
+      .replace(/[^0-9.]/g, "");
+    return parseFloat(cleanedPrice) || 0;
   };
 
   const formatPrice = (price) => {
@@ -23,11 +28,29 @@ const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
     setAddressInput(initialAddress);
   }, [initialAddress]);
 
-  const totalSum = cart.items.reduce(
-    (sum, item) => sum + parsePrice(item.selectedPrice),
-    0
-  );
+  // Raggruppa gli item per categoria (utilizzando il campo item.category)
+  const groupedItems = cart.items.reduce((acc, item) => {
+    const cat = item.category; // "physical", "online", "product"
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(item);
+    return acc;
+  }, {});
 
+  // Calcola il totale per ciascuna categoria e il totale complessivo
+  const categoryTotals = {};
+  let overallTotal = 0;
+
+  Object.keys(groupedItems).forEach((category) => {
+    const subtotal = groupedItems[category].reduce((sum, item) => {
+      const price =
+        item.selectedPrice === "Gratis" ? 0 : parsePrice(item.selectedPrice);
+      return sum + price;
+    }, 0);
+
+    categoryTotals[category] = subtotal;
+    overallTotal += subtotal;
+  });
+  
   const handleAddressSave = async () => {
     await onUpdateAddress(addressInput);
     setBillingAddress(addressInput);
@@ -63,32 +86,69 @@ const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
         </div>
       ) : (
         <>
-          <ul className="modern-cart-items">
-            {cart.items.map((item) => (
-              <li key={item._id} className="modern-cart-item">
-                <div className="modern-item-info">
-                  <img src={item.course.img} alt={item.course.title} />
-                  <div className="modern-item-details">
-                    <h3>{item.course.title}</h3>
-                    <p>Preț: {item.selectedPrice} RON</p>
-                  </div>
-                </div>
-                <button
-                  className="modern-remove-btn"
-                  onClick={() => onRemove(item._id)}
-                >
-                  Elimină
-                </button>
-              </li>
-            ))}
-          </ul>
+          {Object.entries(groupedItems).map(([category, items]) => {
+            let categoryTitle = "";
+            switch (category) {
+              case "physical":
+                categoryTitle = "Cursuri Fizice";
+                break;
+              case "online":
+                categoryTitle = "Cursuri Online";
+                break;
+              case "product":
+                categoryTitle = "Produse";
+                break;
+              default:
+                categoryTitle = category;
+            }
+            return (
+              <div key={category} className="cart-category-group">
+                <h3>{categoryTitle}</h3>
+                <ul className="modern-cart-items">
+                  {items.map((item) => (
+                    <li key={item._id} className="modern-cart-item">
+                      <div className="modern-item-info">
+                        {/* Usa item.itemRef con optional chaining */}
+                        <img
+                          src={item.itemRef?.img || "/images/placeholder.jpg"}
+                          alt={
+                            item.itemRef?.title || "Detalii curs indisponibile"
+                          }
+                        />
+                        <div className="modern-item-details">
+                          <h4>{item.itemRef?.title || "Titlu necunoscut"}</h4>
+                          <p>
+                            Preț:{" "}
+                            {item.selectedPrice === "Gratis"
+                              ? "0"
+                              : item.selectedPrice}{" "}
+                            RON
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        className="modern-remove-btn"
+                        onClick={() => onRemove(item._id)}
+                      >
+                        Elimină
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <p className="category-total">
+                  Total {categoryTitle}:{" "}
+                  <strong>{formatPrice(categoryTotals[category])} RON</strong>
+                </p>
+              </div>
+            );
+          })}
 
           <div className="modern-cart-summary">
             <div className="modern-summary-header">
               <h3>Rezumat Comandă</h3>
             </div>
             <p className="modern-total-sum">
-              Total: <strong>{formatPrice(totalSum)} RON</strong>
+              Total General: <strong>{formatPrice(overallTotal)} RON</strong>
             </p>
 
             <div className="modern-form-group modern-billing-address">

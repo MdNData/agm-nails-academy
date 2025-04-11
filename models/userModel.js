@@ -1,3 +1,4 @@
+// userModel.js
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
@@ -47,5 +48,4 @@ UserSchema.methods.toJSON = function () {
 };
 
 const User = mongoose.model("User", UserSchema);
-
 export default User;

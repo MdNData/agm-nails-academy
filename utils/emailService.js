@@ -101,3 +101,55 @@ export const sendForgotPasswordEmail = async (userEmail, resetUrl) => {
 
   return transporter.sendMail(mailOptions);
 };
+
+export const sendResetPasswordEmail = async (user) => {
+  const logoUrl =
+    "https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png";
+  const loginUrl = process.env.APP_LOGIN_URL;
+
+  const mailOptions = {
+    from:
+      process.env.SMTP_FROM ||
+      '"AGM Nails Shop & Academy" <no-reply@agmnails.com>',
+    to: user.email,
+    subject: "Parola a fost actualizata!",
+    html: `
+      <div
+        style="
+          font-family: Arial, sans-serif;
+          text-align: center;
+          padding: 20px;
+          background-color: #1a1a1a;
+          color: white;
+        "
+      >
+        <img
+          src="https://res.cloudinary.com/dombhm6kq/image/upload/v1744197948/agmnailsacademy/logo/fplme9k0usg15ctnzhjd.png"
+          alt="Logo"
+          style="width: 70%; margin-bottom: 20px; max-width: 350px"
+        />
+        <h2>Buna, ${user.nume}!</h2>
+        <p>
+          Îți confirmăm că parola contului tău a fost actualizată cu succes.
+        </p>
+        <p>Pentru a te conecta cu noua ta parolă, apasă pe butonul de mai jos:</p>
+        <a
+          href="${loginUrl}"
+          style="
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #fff;
+            background-color: #dba04d;
+            text-decoration: none;
+            border-radius: 4px;
+          "
+        >Accesează contul</a>
+        <p>Dacă nu ai efectuat această modificare, te rugăm să contactezi imediat departamentul nostru de suport, sau raspunde direct la acest email.</p>
+      </div>
+    `,
+  };
+
+  return transporter.sendMail(mailOptions);
+};

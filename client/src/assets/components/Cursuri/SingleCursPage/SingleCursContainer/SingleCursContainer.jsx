@@ -24,6 +24,7 @@ const SingleCursContainer = ({ course }) => {
       const response = await apiFetch.post("/cart", {
         courseId: course._id,
         selectedPrice,
+        category: "physical",
       });
       toast.success(response.data.msg || "Curs adăugat în coș!");
     } catch (error) {

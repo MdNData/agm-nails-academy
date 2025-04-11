@@ -9,6 +9,7 @@ import {
 import User from "../models/userModel.js";
 import {
   sendForgotPasswordEmail,
+  sendResetPasswordEmail,
   sendWelcomeEmail,
 } from "../utils/emailService.js"; // Importa il servizio email
 
@@ -164,6 +165,13 @@ export const completeResetPassword = async (req, res) => {
     user.passwordChangedAt = Date.now();
 
     await user.save();
+
+    sendResetPasswordEmail(user).catch((err) => {
+      console.error(
+        "Eroare la trimiterea emailului de confirmare resetare parola:",
+        err
+      );
+    });
 
     return res
       .status(StatusCodes.OK)

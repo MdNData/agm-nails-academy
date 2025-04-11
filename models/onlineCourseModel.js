@@ -1,4 +1,9 @@
+// onlineCourseModel.js
 import mongoose from "mongoose";
+
+function arrayLimit(val) {
+  return val.length >= 1;
+}
 
 const OnlineCourseSchema = new mongoose.Schema(
   {
@@ -70,10 +75,5 @@ const OnlineCourseSchema = new mongoose.Schema(
   }
 );
 
-// Validatore personalizzato
-function arrayLimit(val) {
-  return val.length >= 1;
-}
-
-export default mongoose.model("OnlineCourse", OnlineCourseSchema);
-
+const OnlineCourse = mongoose.model("OnlineCourse", OnlineCourseSchema);
+export default OnlineCourse;

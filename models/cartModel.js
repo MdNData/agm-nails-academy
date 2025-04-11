@@ -1,10 +1,15 @@
+// cartmodel.js
 import mongoose from "mongoose";
 
 const CartItemSchema = new mongoose.Schema({
-  course: {
+  itemRef: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Course",
     required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ["physical", "online", "product"],
   },
   selectedPrice: {
     type: String,
@@ -22,7 +27,7 @@ const CartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true, 
+      unique: true,
     },
     items: [CartItemSchema],
   },
