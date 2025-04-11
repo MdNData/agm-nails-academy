@@ -1043,8 +1043,9 @@ body .single-curs-page .single-curs-container .action-buttons .btn-secondary:hov
 }
 @media (max-width: 768px) {
   body .single-curs-page .single-curs-container {
-    margin: 1rem;
+    margin: auto;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    width: 90%;
   }
   body .single-curs-page .single-curs-container img {
     height: 250px;
