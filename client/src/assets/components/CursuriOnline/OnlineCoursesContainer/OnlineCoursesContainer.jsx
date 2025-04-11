@@ -6,7 +6,6 @@ const OnlineCoursesContainer = ({ courses }) => {
   if (!courses || courses.length === 0) {
     return <p>Nu sunt cursuri online disponibile.</p>;
   }
-  console.log(courses)
 
   return (
     <section className="online-courses-container">
@@ -19,7 +18,7 @@ const OnlineCoursesContainer = ({ courses }) => {
             {course.thirdTitle && <h3>{course.thirdTitle}</h3>}
           </div>
           <div className="price-container">
-            <p className="price">{course.price}</p>
+            <p className="price">{"Nou"}</p>
             {course.price2 && <p className="price">{course.price2}</p>}
           </div>
           {course.isPurchased && (

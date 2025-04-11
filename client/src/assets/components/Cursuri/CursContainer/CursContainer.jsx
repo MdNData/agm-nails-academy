@@ -18,7 +18,7 @@ const CursContainer = ({ courses }) => {
             {course.thirdTitle && <h3>{course.thirdTitle}</h3>}
           </div>
           <div className="price-container">
-            <p className="price">{course.price}</p>
+            <p className="price">{"Nou"}</p>
             {course.price2 && <p className="price">{course.price2}</p>}
           </div>
           <Link to={`/cursuri/curs/${course._id || course.id}`}>
