@@ -1,12 +1,23 @@
 [
   {
-    "id": 1,
     "title": "Curs de bază",
     "secondTitle": "Stilist - Protezist",
     "thirdTitle": "~ de la 0 la profesionist în 5 zile ~",
-    "price": "1.800 lei - 5 zile",
-    "price2": "2.450 lei cu acreditare",
     "img": "https://res.cloudinary.com/dombhm6kq/image/upload/v1742228144/agmnailsacademy/mrhysiq75ogkogg0kc2i.webp",
+    "prices": [
+      {
+        "value": "1.800,00 RON",
+        "days": 5,
+        "accreditation": false,
+        "advancePayment": false
+      },
+      {
+        "value": "2.450,00 RON",
+        "days": 5,
+        "accreditation": true,
+        "advancePayment": false
+      }
+    ],
     "elements": [
       {
         "id": 1,
@@ -105,12 +116,47 @@
     ]
   },
   {
-    "id": 2,
     "title": "Curs de perfecționare",
     "secondTitle": "Level Up ~ perfecționează-ți tehnica și lucrează mai rapid, mai precis! ~",
-    "price": "500 - 2.000 lei ~ 1 - 5 zile",
-    "price2": "2.650 lei cu acreditare",
     "img": "https://res.cloudinary.com/dombhm6kq/image/upload/v1742228145/agmnailsacademy/j0klyers2iu0qnr9g7dd.webp",
+    "prices": [
+      {
+        "value": "500,00 RON",
+        "days": 1,
+        "accreditation": false,
+        "advancePayment": false
+      },
+      {
+        "value": "1.000,00 RON",
+        "days": 2,
+        "accreditation": false,
+        "advancePayment": false
+      },
+      {
+        "value": "1.500,00 RON",
+        "days": 3,
+        "accreditation": false,
+        "advancePayment": false
+      },
+      {
+        "value": "2.000,00 RON",
+        "days": 4,
+        "accreditation": false,
+        "advancePayment": false
+      },
+      {
+        "value": "2.000,00 RON",
+        "days": 5,
+        "accreditation": false,
+        "advancePayment": false
+      },
+      {
+        "value": "2.650,00 RON",
+        "days": 5,
+        "accreditation": true,
+        "advancePayment": false
+      }
+    ],
     "elements": [
       {
         "id": 1,

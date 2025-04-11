@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import apiFetch from "../assets/utils/apiFetch";
 import CartComponent from "../assets/components/Cart/CartComponent";
 import { toast } from "react-toastify";
 import cart_img from "../assets/images/empty-cart-3.png";
+import { AuthContext } from "../assets/utils/AuthContext";
 
 const Cart = () => {
   const [cart, setCart] = useState({ items: [] });
   const [userAddress, setUserAddress] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { refreshCartItemCount } = useContext(AuthContext);
 
   const fetchCart = async () => {
     try {
@@ -49,6 +51,7 @@ const Cart = () => {
       await apiFetch.delete(`/cart/${itemId}`);
       await fetchCart();
       toast.success("Cursul a fost eliminat din coș!");
+      refreshCartItemCount();
     } catch (error) {
       console.error("Eroare la eliminarea cursului din coș:", error);
       toast.error("A apărut o eroare la eliminarea cursului.");

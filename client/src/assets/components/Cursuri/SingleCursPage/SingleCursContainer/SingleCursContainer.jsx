@@ -3,23 +3,24 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import apiFetch from "../../../../utils/apiFetch";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../../../utils/AuthContext"; // Importa il contesto
+import { AuthContext } from "../../../../utils/AuthContext";
 
 const SingleCursContainer = ({ course }) => {
   const [openDescription, setOpenDescription] = useState({});
-  const [selectedPrice, setSelectedPrice] = useState(course.price);
-  const { user } = useContext(AuthContext); // Stato dell'utente
+  const [selectedPrice, setSelectedPrice] = useState(
+    course?.prices?.[0] || null
+  );
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { refreshCartItemCount } = useContext(AuthContext);
 
   const handleAddToCart = async () => {
-    // Se l'utente non è loggato, reindirizza alla pagina di login.
     if (!user) {
       navigate("/autentificare", { state: { from: location } });
       return;
     }
 
-    // Se l'utente è loggato, procedi con l'aggiunta al carrello.
     try {
       const response = await apiFetch.post("/cart", {
         courseId: course._id,
@@ -27,6 +28,7 @@ const SingleCursContainer = ({ course }) => {
         category: "physical",
       });
       toast.success(response.data.msg || "Curs adăugat în coș!");
+      refreshCartItemCount();
     } catch (error) {
       console.error("Eroare la adăugarea în coș:", error);
       const errorMsg =
@@ -48,104 +50,109 @@ const SingleCursContainer = ({ course }) => {
   };
 
   const handlePriceChange = (event) => {
-    setSelectedPrice(event.target.value);
+    const selected = course.prices.find((p) => p.value === event.target.value);
+    setSelectedPrice(selected || null);
   };
 
-  if (!course || !course.elements || !Array.isArray(course.elements)) {
+  if (!course || !Array.isArray(course.elements)) {
     return <p>Dettagli del corso non disponibili.</p>;
   }
 
   return (
-    <article>
+    <article className="single-curs-container">
       <img src={course.img} alt={course.title} style={{ width: "100%" }} />
-      {course.elements.map((data, index) => (
-        <div key={index}>
-          <h3 onClick={() => toggleDescription(index)}>
-            {data.title}
-            <span>
+
+      <div className="curs-content">
+        <div className="price-selector">
+          <label htmlFor="price">Alege prețul:</label>
+          <select
+            id="price"
+            value={selectedPrice?.value || ""}
+            onChange={handlePriceChange}
+          >
+            {course.prices?.map((priceObj, index) => {
+              const label = `${priceObj.value} RON - ${priceObj.days} zile - ${
+                priceObj.accreditation ? "cu acreditare" : "fără acreditare"
+              }`;
+
+              return (
+                <option key={index} value={priceObj.value}>
+                  {label}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        {course.elements.map((data, index) => (
+          <div key={index} className="element-item">
+            <div
+              className="element-header"
+              onClick={() => toggleDescription(index)}
+            >
+              <h3>{data.title}</h3>
               {openDescription[index] ? (
                 <MdKeyboardArrowUp />
               ) : (
                 <MdKeyboardArrowDown />
               )}
-            </span>
-          </h3>
-          {openDescription[index] && (
-            <ul>
-              {data.details &&
-                data.details.map((description, i) => (
+            </div>
+
+            {openDescription[index] && (
+              <ul className="element-details">
+                {data.details?.map((desc, i) => (
                   <li key={i}>
-                    <span className="circle"></span>
-                    {description}
+                    <span className="circle"></span> {desc}
                   </li>
                 ))}
-              {data.days &&
-                data.days.map((day, j) => (
+
+                {data.days?.map((day, j) => (
                   <div key={j}>
-                    <h3 onClick={() => toggleDescription(index, j)}>
-                      {day.title}
-                      <span>
-                        {openDescription[`${index}-${j}`] ? (
-                          <MdKeyboardArrowUp />
-                        ) : (
-                          <MdKeyboardArrowDown />
-                        )}
-                      </span>
-                    </h3>
+                    <div
+                      className="element-sub-header"
+                      onClick={() => toggleDescription(index, j)}
+                    >
+                      <h4>{day.title}</h4>
+                      {openDescription[`${index}-${j}`] ? (
+                        <MdKeyboardArrowUp />
+                      ) : (
+                        <MdKeyboardArrowDown />
+                      )}
+                    </div>
+
                     {openDescription[`${index}-${j}`] && (
-                      <ul>
-                        {day.lista.map((lesson, k) => (
+                      <ul className="sub-element-details">
+                        {day.lista?.map((lesson, k) => (
                           <li key={k}>
-                            <span className="circle"></span>
-                            {lesson}
+                            <span className="circle"></span> {lesson}
                           </li>
                         ))}
                       </ul>
                     )}
                   </div>
                 ))}
-            </ul>
-          )}
+              </ul>
+            )}
+          </div>
+        ))}
+
+        <div className="action-buttons">
+          <button className="btn btn-primary" onClick={handleAddToCart}>
+            Adaugă în coș
+          </button>
+          <a
+            href="https://api.whatsapp.com/send?phone=40770541506&text=Bun%C4%83%2C%20sunt%20interesat%C4%83%20la%20"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-secondary"
+          >
+            Sau întreabă-mă pe WhatsApp
+          </a>
+          <Link className="btn btn-secondary" to="/cart">
+            Vezi coșul
+          </Link>
         </div>
-      ))}
-      <section className="curs-prices">
-        <div>
-          <h3>Selectează opțiunea de preț:</h3>
-          <label htmlFor="price1">
-            <input
-              type="radio"
-              id="price1"
-              name="price"
-              value={course.price}
-              checked={selectedPrice === course.price}
-              onChange={handlePriceChange}
-            />
-            {course.price}
-          </label>
-          <label htmlFor="price2">
-            <input
-              type="radio"
-              id="price2"
-              name="price"
-              value={course.price2}
-              checked={selectedPrice === course.price2}
-              onChange={handlePriceChange}
-            />
-            {course.price2}
-          </label>
-        </div>
-      </section>
-      <section className="buttons">
-        <button onClick={handleAddToCart}>Adaugă în coș</button>
-        <a
-          href="https://api.whatsapp.com/send?phone=40770541506&text=Bun%C4%83%2C%20sunt%20interesat%C4%83%20la%20"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Sau întreabă-mă pe WhatsApp
-        </a>
-        <Link to="/cart">Vezi coșul</Link>
-      </section>
+      </div>
     </article>
   );
 };

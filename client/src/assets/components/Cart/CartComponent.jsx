@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
   const parsePrice = (priceStr) => {
-    if (priceStr === "Gratis" || priceStr === "") return 0;
+    if (!priceStr || priceStr === "Gratis" || priceStr === "") return 0;
     const cleanedPrice = priceStr
       .replace(/\./g, "")
       .replace(",", ".")
@@ -43,14 +43,16 @@ const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
   Object.keys(groupedItems).forEach((category) => {
     const subtotal = groupedItems[category].reduce((sum, item) => {
       const price =
-        item.selectedPrice === "Gratis" ? 0 : parsePrice(item.selectedPrice);
+        item.selectedPrice?.value === "Gratis"
+          ? 0
+          : parsePrice(item.selectedPrice?.value);
       return sum + price;
     }, 0);
 
     categoryTotals[category] = subtotal;
     overallTotal += subtotal;
   });
-  
+
   const handleAddressSave = async () => {
     await onUpdateAddress(addressInput);
     setBillingAddress(addressInput);
@@ -108,7 +110,6 @@ const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
                   {items.map((item) => (
                     <li key={item._id} className="modern-cart-item">
                       <div className="modern-item-info">
-                        {/* Usa item.itemRef con optional chaining */}
                         <img
                           src={item.itemRef?.img || "/images/placeholder.jpg"}
                           alt={
@@ -119,11 +120,21 @@ const CartComponent = ({ cart, onRemove, onUpdateAddress, initialAddress }) => {
                           <h4>{item.itemRef?.title || "Titlu necunoscut"}</h4>
                           <p>
                             Preț:{" "}
-                            {item.selectedPrice === "Gratis"
+                            {item.selectedPrice?.value === "Gratis"
                               ? "0"
-                              : item.selectedPrice}{" "}
+                              : formatPrice(
+                                  parsePrice(item.selectedPrice?.value)
+                                )}{" "}
                             RON
                           </p>
+                          {item.selectedPrice && (
+                            <p>
+                              {item.selectedPrice.days} zile -{" "}
+                              {item.selectedPrice.accreditation
+                                ? "cu acreditare"
+                                : "fără acreditare"}
+                            </p>
+                          )}
                         </div>
                       </div>
                       <button

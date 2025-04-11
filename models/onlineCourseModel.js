@@ -1,4 +1,3 @@
-// onlineCourseModel.js
 import mongoose from "mongoose";
 
 function arrayLimit(val) {
@@ -10,8 +9,20 @@ const OnlineCourseSchema = new mongoose.Schema(
     title: { type: String, required: [true, "Titlul este obligatoriu"] },
     secondTitle: String,
     thirdTitle: String,
-    price: { type: String, required: [true, "Prețul este obligatoriu"] },
-    price2: String,
+
+    // Cambiato per supportare più prezzi
+    prices: [
+      {
+        value: { type: String, required: [true, "Prețul este obligatoriu"] },
+        days: {
+          type: Number,
+          required: [true, "Numărul de zile este obligatoriu"],
+        },
+        accreditation: { type: Boolean, required: true },
+        advancePayment: { type: Boolean, required: true },
+      },
+    ],
+
     img: {
       type: String,
       required: true,
@@ -58,7 +69,7 @@ const OnlineCourseSchema = new mongoose.Schema(
             },
             duration: {
               type: String,
-              match: /^([0-5]?\d):([0-5]\d)$/,
+              match: /^([0-5]?\d):([0-5]\d)$/, // Formato "MM:SS"
             },
           },
         ],

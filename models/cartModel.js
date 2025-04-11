@@ -12,8 +12,22 @@ const CartItemSchema = new mongoose.Schema({
     enum: ["physical", "online", "product"],
   },
   selectedPrice: {
-    type: String,
-    required: true,
+    value: {
+      type: String,
+      required: true,
+    },
+    days: {
+      type: Number,
+      required: true,
+    },
+    accreditation: {
+      type: Boolean,
+      required: true,
+    },
+    advancePayment: {
+      type: Boolean,
+      required: true,
+    },
   },
   addedAt: {
     type: Date,

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductsContainer = ({ products }) => {
   if (!products || products.length === 0) {
-    return <p>Nu sunt produse disponibile.</p>;
+    return <p>Produsele vor fi disponibile in urmatoarele saptamani.</p>;
   }
 
   return (

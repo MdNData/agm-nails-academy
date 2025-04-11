@@ -53,15 +53,18 @@ export const getCountItemCart = async (req, res) => {
   }
 };
 
-// Aggiunge o aggiorna un elemento nel carrello
 export const addCourseToCart = async (req, res) => {
   try {
+    // Estrai i dati dalla richiesta
     const { courseId, selectedPrice, category } = req.body;
+
+    // Verifica che tutti i dati necessari siano presenti
     if (!courseId || !selectedPrice || !category) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: "Date incomplete." });
     }
+
     // Verifica l'esistenza nel modello in base alla categoria
     let courseExists = null;
     if (category === "physical") {
@@ -69,34 +72,55 @@ export const addCourseToCart = async (req, res) => {
     } else if (category === "online") {
       courseExists = await OnlineCourse.findById(courseId);
     }
-    // Se categoria "product" puoi aggiungere controlli con il modello Product
+
+    // Se il corso non esiste, restituisci un errore
     if (!courseExists) {
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ msg: "Elementul nu a fost găsit." });
     }
+
     // Trova o crea il carrello dell'utente
     let cart = await Cart.findOne({ user: req.user.userId });
     if (!cart) {
       cart = await Cart.create({ user: req.user.userId, items: [] });
     }
-    // Cerca se l'elemento è già presente (verifica sia l'ID che la categoria)
+
+    if (typeof selectedPrice.value !== "string") {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "Formato prezzo non valido." });
+    }
+    if (typeof selectedPrice.days !== "number") {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "Giorni non valido." });
+    }
+
+    // Cerca se l'elemento è già presente nel carrello (verifica l'ID e la categoria)
     const itemIndex = cart.items.findIndex(
       (item) =>
         item.itemRef.toString() === courseId && item.category === category
     );
+
+    // Se l'elemento esiste già, aggiorna il prezzo selezionato
     if (itemIndex > -1) {
       cart.items[itemIndex].selectedPrice = selectedPrice;
     } else {
+      // Altrimenti, aggiungi il nuovo elemento
       cart.items.push({ itemRef: courseId, selectedPrice, category });
     }
+
+    // Salva il carrello aggiornato
     await cart.save();
+
+    // Rispondi con successo
     res.status(StatusCodes.OK).json({
       msg: "Elementul a fost adăugat în coș.",
       cart,
     });
   } catch (error) {
-    console.error("Eroare la adăugarea în coș:", error);
+    console.error("Errore nell'aggiunta al carrello:", error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       msg: "Eroare internă la adăugarea în coș.",
     });

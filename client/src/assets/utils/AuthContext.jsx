@@ -13,8 +13,8 @@ const AuthProvider = ({ children }) => {
       const response = await apiFetch.get("/access/verify");
       setUser(response.data.user);
       if (response.data.user) {
-        const response = await apiFetch.get("/cart/item-count");
-        setCartItemCount(response.data.itemCount);
+        const countResponse = await apiFetch.get("/cart/item-count");
+        setCartItemCount(countResponse.data.itemCount);
       }
     } catch (error) {
       setUser(null);
@@ -32,6 +32,16 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  // Funzione per aggiornare il contatore del carrello
+  const refreshCartItemCount = async () => {
+    try {
+      const response = await apiFetch.get("/cart/item-count");
+      setCartItemCount(response.data.itemCount);
+    } catch (error) {
+      console.error("Erroare la actualizarea contorului de coș:", error);
+    }
+  };
+
   useEffect(() => {
     checkLogin();
   }, []);
@@ -45,6 +55,7 @@ const AuthProvider = ({ children }) => {
         logout,
         cartItemCount,
         setCartItemCount,
+        refreshCartItemCount, // rendiamo disponibile la funzione
       }}
     >
       {children}

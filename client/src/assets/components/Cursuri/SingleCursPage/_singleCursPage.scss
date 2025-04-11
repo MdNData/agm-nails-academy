@@ -1,166 +1,152 @@
+$primary-color: rgb(219, 160, 77);
+$primary-hover: darken($primary-color, 10%);
+$courses-container-max-width: 1000px;
+$course-card-max-width: 400px;
+
 article {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 2rem auto;
+  padding: 2rem;
   max-width: 700px;
   width: 90%;
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  border-top: 5px solid rgb(219, 160, 77);
-  gap: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-top: 5px solid $primary-color;
+  gap: 2rem;
+  transition: transform 0.3s ease;
 
   @media screen and (min-width: 490px) {
     width: 80%;
   }
 
+  &:hover {
+    transform: translateY(-3px);
+  }
+
   img {
     width: 100%;
     display: block;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
     max-width: 650px;
-  }
-
-  /* Sezione per ogni elemento espandibile */
-  & > div {
-    width: 100%;
-    background-color: rgba(219, 160, 77, 0.08);
-    padding: 15px 20px;
-    border: 1px solid rgba(219, 160, 77, 0.3);
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: rgba(219, 160, 77, 0.15);
-    }
-
-    &:last-of-type {
-      border-bottom: 1px solid rgba(219, 160, 77, 0.3);
-    }
-  }
-
-  h3 {
-    font-family: "Urbanist", sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: #333;
-    margin: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-
-    svg {
-      margin-bottom: -5px;
-      transition: transform 0.3s ease;
-    }
-  }
-
-  ul {
-    padding: 0;
-    list-style: none;
-
-    .circle {
-      width: 10px;
-      height: 10px;
-      display: inline-block;
-      margin-bottom: 1px;
-      margin-right: 8px;
-      border-radius: 50px;
-      background-color: rgb(219, 160, 77);
-    }
-
-    li {
-      font-family: "Mulish", sans-serif;
-      font-size: 18px;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-      padding: 4px 8px;
-      border-radius: 6px;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #f3f3f3;
-      }
-    }
-
-    /* Per eventuali sotto-sezioni */
-    div {
-      border-bottom: none;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      border: 1px solid rgba(219, 160, 77, 0.3);
-
-      &:last-child {
-        border-bottom: 1px solid rgba(219, 160, 77, 0.3);
-      }
-
-      h3 {
-        margin: 0;
-        padding: 10px;
-      }
-
-      ul {
-        padding: 5px 0;
-      }
-    }
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
   }
 
   .curs-prices {
     width: 100%;
-    padding: 10px 0;
+    padding: 1rem 0;
     text-align: center;
 
     h3 {
-      margin: 15px 0 20px;
+      margin: 0 0 1.5rem;
+      font-family: "Urbanist", sans-serif;
+      font-size: 1.4rem;
+      color: $secondary-color;
     }
 
     label {
       display: flex;
       align-items: center;
       font-family: "Mulish", sans-serif;
-      font-size: 18px;
-      letter-spacing: -0.5px;
-      margin: 10px 0 0 10px;
+      font-size: 1rem;
+      color: $text-dark;
+      margin: 0.5rem 0;
       cursor: pointer;
-      transition: color 0.3s ease;
+      padding-left: 1rem;
 
       input {
-        margin-right: 15px;
-        cursor: pointer;
+        margin-right: 0.8rem;
         transform: scale(1.2);
+        accent-color: $primary-color;
+      }
+    }
+  }
+
+  .accordion-item {
+    width: 100%;
+    background: rgba($primary-color, 0.05);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba($primary-color, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+      transform: translateY(-2px);
+    }
+
+    h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Urbanist", sans-serif;
+      font-size: 1.2rem;
+      color: $secondary-color;
+      margin: 0;
+
+      svg {
+        transition: transform 0.3s ease;
+        color: $primary-color;
+      }
+    }
+
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+      list-style: none;
+
+      li {
+        position: relative;
+        font-family: "Mulish", sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+        color: $text-light;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: -1rem;
+          top: 0.6rem;
+          width: 8px;
+          height: 8px;
+          background-color: $primary-color;
+          border-radius: 50%;
+        }
       }
     }
   }
 
   section.buttons {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+
     a,
     button {
-      display: block;
-      border: 1px solid rgb(219, 160, 77);
+      border: 1px solid $primary-color;
       text-align: center;
-      padding: 12px 20px;
-      margin: 15px auto 0 auto;
-      color: white;
-      background-color: rgb(219, 160, 77);
-      text-decoration: none;
+      padding: 1rem 2rem;
       font-family: "Mulish", sans-serif;
-      font-size: 18px;
+      font-size: 1rem;
       font-weight: 500;
-      border-radius: 8px;
-      max-width: 400px;
-      min-width: 280px;
-      width: 100%;
-      cursor: pointer;
+      border-radius: 10px;
+      color: white;
+      background-color: $primary-color;
+      text-decoration: none;
       transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
 
       &:hover {
         background-color: white;
-        color: rgb(219, 160, 77);
+        color: $primary-color;
       }
     }
   }

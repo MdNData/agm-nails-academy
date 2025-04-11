@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import apiFetch from "../../../../utils/apiFetch";
@@ -6,32 +6,40 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../../../utils/AuthContext"; // Assicurati che il percorso sia corretto
 
 const SingleOnlineCursContainer = ({ course }) => {
-  // Controllo sull'esistenza del corso
-  if (!course) return <div>Încărcare curs...</div>;
-
-  // Stato per il prezzo selezionato e per le sezioni espanse
-  const [selectedPrice, setSelectedPrice] = useState(course?.price || "");
+  const [selectedPrice, setSelectedPrice] = useState(null);
   const [expandedSections, setExpandedSections] = useState([]);
-
-  // Importa i dati utente dal contesto e i metodi di navigazione
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { refreshCartItemCount } = useContext(AuthContext);
 
-  // Handler per l'aggiunta del corso al carrello
+  // Imposta il prezzo di default non appena il course viene passato (e se prices esiste)
+  useEffect(() => {
+    if (course && course.prices && course.prices.length > 0 && !selectedPrice) {
+      setSelectedPrice(course.prices[0]);
+    }
+  }, [course, selectedPrice]);
+
+  // Gestione dell'aggiunta al carrello
   const handleAddToCart = async () => {
-    // Se l'utente non è loggato, reindirizza alla pagina di login
     if (!user) {
       navigate("/autentificare", { state: { from: location } });
       return;
     }
+
+    if (!selectedPrice) {
+      toast.error("Vă rugăm să selectați un preț.");
+      return;
+    }
+
     try {
       const response = await apiFetch.post("/cart", {
         courseId: course._id,
         selectedPrice,
-        category: "online", // Imposta la categoria a "online" per i corsi online
+        category: "online",
       });
       toast.success(response.data.msg || "Curs online adăugat în coș!");
+      refreshCartItemCount();
     } catch (error) {
       console.error("Eroare la adăugarea în coș:", error);
       const errorMsg =
@@ -40,15 +48,21 @@ const SingleOnlineCursContainer = ({ course }) => {
     }
   };
 
+  // Gestione il cambio di prezzo
+  const handlePriceChange = (e) => {
+    const selected = course?.prices?.find((p) => p.value === e.target.value);
+    setSelectedPrice(selected || null);
+  };
+
+  // Gestione dell'espansione delle sezioni
   const toggleExpand = (index) => {
     setExpandedSections((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
-  const handlePriceChange = (e) => {
-    setSelectedPrice(e.target.value);
-  };
+  // Se i dati del corso non sono disponibili, mostra un messaggio
+  if (!course) return <div>Încărcare curs...</div>;
 
   return (
     <div className="single-curs-container">
@@ -66,18 +80,26 @@ const SingleOnlineCursContainer = ({ course }) => {
 
         <div className="price-selector">
           <label htmlFor="price">Alege prețul:</label>
-          <select id="price" value={selectedPrice} onChange={handlePriceChange}>
-            {course.price && (
-              <option value={course.price}>{course.price}</option>
-            )}
-            {course.price2 && (
-              <option value={course.price2}>{course.price2}</option>
-            )}
+          <select
+            id="price"
+            value={selectedPrice?.value || ""}
+            onChange={handlePriceChange}
+          >
+            {course.prices?.map((priceObj, index) => {
+              const label = `${priceObj.value} RON - ${priceObj.days} zile - ${
+                priceObj.accreditation ? "cu acreditare" : "fără acreditare"
+              }`;
+              return (
+                <option key={index} value={priceObj.value}>
+                  {label}
+                </option>
+              );
+            })}
           </select>
         </div>
 
         {selectedPrice && (
-          <p className="selected-price">Preț selectat: {selectedPrice}</p>
+          <p className="selected-price">Preț selectat: {selectedPrice.value}</p>
         )}
 
         {course.elements?.length > 0 ? (
@@ -119,9 +141,9 @@ const SingleOnlineCursContainer = ({ course }) => {
               <button className="btn btn-primary" onClick={handleAddToCart}>
                 Adaugă în coș
               </button>
-                <Link className="btn btn-secondary" to="/cart">
-                  Vezi coșul
-                </Link>
+              <Link className="btn btn-secondary" to="/cart">
+                Vezi coșul
+              </Link>
             </>
           )}
         </div>

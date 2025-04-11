@@ -6,11 +6,15 @@ import SingleOnlineCursContainer from "./SingleOnlineCourseContainer/SingleOnlin
 export const loader = async ({ params }) => {
   const { id } = params;
   const response = await fetch(`/api/cursuri-online/${id}`);
+
   if (!response.ok) {
     throw new Error("Errore nel caricamento del corso online.");
   }
-  const course = await response.json();
-  return course.data;
+
+  const courses = await response.json(); // Dato che la risposta è un array
+  const course = courses.data; // Accedi al primo elemento dell'array
+
+  return course; // Restituisci l'oggetto del corso
 };
 
 const SingleOnlineCursPage = () => {
